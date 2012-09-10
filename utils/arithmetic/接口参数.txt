@@ -1,0 +1,49 @@
+封包助手接口参数
+
+一、功能描述：
+
+1、封包助手全面支持算法导入导出功能，使您在截取数据包的时候不必再因为算法问题困扰，只要写一个DLL文件，封包助手就可以调用，并且解密或加密数据
+
+
+二、加密函数：
+
+1、函数名：Plugin_Encode
+
+2、参数：pIn: pChar（数据源）
+	 Size: LongWord（数据源长度）
+	 pOut: pChar（输出数据）
+
+3、返回值类型：LongWord
+
+4、整体描述：Plugin_Encode(pIn: pChar; Size: LongWord; pOut: pChar): LongWord ; stdcall;
+
+5、具体请参考软件附带例子（Encode_Example）
+
+
+三、解密函数：
+
+1、函数名：Plugin_Decode
+
+2、参数：pIn: pChar（数据源）
+	 Size: LongWord（数据源长度）
+	 pOut: pChar（输出数据）
+
+3、返回值类型：LongWord
+
+4、整体描述：Plugin_Decode(pIn: pChar; Size: LongWord; pOut: pChar): LongWord ; stdcall;
+
+5、具体请参考软件附带例子（Decode_Example）
+
+
+四：注意事项：
+
+1、如此功能对您的软件造成损害，请您联系我
+
+2、算法造成的相关责任作者不负责承担
+
+
+
+2007.12.06
+Written By Guozidi（郭子迪）
+http://www.guozidi.cn
+guozidi@gmail.com

@@ -1,0 +1,217 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://schema.goldshowing.com/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" targetNamespace="http://schema.goldshowing.com/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://schema.goldshowing.com/">
+      <s:element name="Authenticate">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="AuthStr" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="AuthenticateResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="AuthenticateResult" type="tns:AuthResult" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="AuthResult">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="IsAuthenticated" type="s:boolean" />
+          <s:element minOccurs="0" maxOccurs="1" name="Channels" type="tns:ArrayOfChannel" />
+          <s:element minOccurs="1" maxOccurs="1" name="IsAdmin" type="s:boolean" />
+          <s:element minOccurs="0" maxOccurs="1" name="Version" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="DownloadUrl" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfChannel">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="Channel" nillable="true" type="tns:Channel" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="Channel">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="ChId" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="ExpireDate" type="s:dateTime" />
+          <s:element minOccurs="0" maxOccurs="1" name="ChName" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="SrvPort" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="SrvIP" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Description" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="GetChannels">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="str" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetChannelsResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetChannelsResult" type="tns:AuthResult" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetOnlineUserCount">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ChId" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetOnlineUserCountResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="GetOnlineUserCountResult" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UpdateChannelInfo">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ChId" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="ChName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="ChDesc" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UpdateChannelInfoResponse">
+        <s:complexType />
+      </s:element>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="AuthenticateSoapIn">
+    <wsdl:part name="parameters" element="tns:Authenticate" />
+  </wsdl:message>
+  <wsdl:message name="AuthenticateSoapOut">
+    <wsdl:part name="parameters" element="tns:AuthenticateResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetChannelsSoapIn">
+    <wsdl:part name="parameters" element="tns:GetChannels" />
+  </wsdl:message>
+  <wsdl:message name="GetChannelsSoapOut">
+    <wsdl:part name="parameters" element="tns:GetChannelsResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetOnlineUserCountSoapIn">
+    <wsdl:part name="parameters" element="tns:GetOnlineUserCount" />
+  </wsdl:message>
+  <wsdl:message name="GetOnlineUserCountSoapOut">
+    <wsdl:part name="parameters" element="tns:GetOnlineUserCountResponse" />
+  </wsdl:message>
+  <wsdl:message name="UpdateChannelInfoSoapIn">
+    <wsdl:part name="parameters" element="tns:UpdateChannelInfo" />
+  </wsdl:message>
+  <wsdl:message name="UpdateChannelInfoSoapOut">
+    <wsdl:part name="parameters" element="tns:UpdateChannelInfoResponse" />
+  </wsdl:message>
+  <wsdl:portType name="PusherSrvSoap">
+    <wsdl:operation name="Authenticate">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">验证用户身份</wsdl:documentation>
+      <wsdl:input message="tns:AuthenticateSoapIn" />
+      <wsdl:output message="tns:AuthenticateSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetChannels">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">读取频道列表</wsdl:documentation>
+      <wsdl:input message="tns:GetChannelsSoapIn" />
+      <wsdl:output message="tns:GetChannelsSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetOnlineUserCount">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">读取当前在线用户数</wsdl:documentation>
+      <wsdl:input message="tns:GetOnlineUserCountSoapIn" />
+      <wsdl:output message="tns:GetOnlineUserCountSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateChannelInfo">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">更新频道信息</wsdl:documentation>
+      <wsdl:input message="tns:UpdateChannelInfoSoapIn" />
+      <wsdl:output message="tns:UpdateChannelInfoSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="PusherSrvSoap" type="tns:PusherSrvSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="Authenticate">
+      <soap:operation soapAction="http://schema.goldshowing.com/Authenticate" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetChannels">
+      <soap:operation soapAction="http://schema.goldshowing.com/GetChannels" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetOnlineUserCount">
+      <soap:operation soapAction="http://schema.goldshowing.com/GetOnlineUserCount" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateChannelInfo">
+      <soap:operation soapAction="http://schema.goldshowing.com/UpdateChannelInfo" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="PusherSrvSoap12" type="tns:PusherSrvSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="Authenticate">
+      <soap12:operation soapAction="http://schema.goldshowing.com/Authenticate" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetChannels">
+      <soap12:operation soapAction="http://schema.goldshowing.com/GetChannels" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetOnlineUserCount">
+      <soap12:operation soapAction="http://schema.goldshowing.com/GetOnlineUserCount" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateChannelInfo">
+      <soap12:operation soapAction="http://schema.goldshowing.com/UpdateChannelInfo" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="PusherSrv">
+    <wsdl:port name="PusherSrvSoap" binding="tns:PusherSrvSoap">
+      <soap:address location="http://www.goldshowing.com/srv/pushersrv.asmx" />
+    </wsdl:port>
+    <wsdl:port name="PusherSrvSoap12" binding="tns:PusherSrvSoap12">
+      <soap12:address location="http://www.goldshowing.com/srv/pushersrv.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

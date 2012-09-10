@@ -1,0 +1,1 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Channel><!--频道信息。type可以取值file或live--><ChannelInfo channelID="10004" type="file" name="" info="" publisher="" /><!--Cache Server Info--><CacheSrv ip="" port="7799" /><!--Live源--><LiveSrv ip="" port="0" /><!--文件源信息--><Files /><Custom><![CDATA[-600499355]]></Custom></Channel>

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?><?xml-stylesheet type='text/xsl' href='_UpgradeReport_Files/UpgradeReport.xslt'?><UpgradeLog>
+<Properties><Property Name="Solution" Value="Pusher-R2">
+</Property><Property Name="解决方案文件" Value="D:\Codes\LiveShowR2\Pusher-R2\Pusher-R2.sln">
+</Property><Property Name="Date" Value="2009年7月28日">
+</Property><Property Name="Time" Value="11:20">
+</Property></Properties><Event ErrorLevel="0" Project="Pusher.Core" Source="Pusher.Core\Pusher.Core.csproj" Description="项目已成功转换">
+</Event><Event ErrorLevel="3" Project="Pusher.Core" Source="Pusher.Core\Pusher.Core.csproj" Description="Converted">
+</Event><Event ErrorLevel="0" Project="Pusher" Source="Pusher\Pusher.csproj" Description="项目已成功转换">
+</Event><Event ErrorLevel="3" Project="Pusher" Source="Pusher\Pusher.csproj" Description="Converted">
+</Event><Event ErrorLevel="0" Project="" Source="Pusher-R2.sln" Description="成功转换解决方案">
+</Event><Event ErrorLevel="3" Project="" Source="Pusher-R2.sln" Description="Converted">
+</Event><Event ErrorLevel="0" Project="Pusher.Core" Source="Pusher.Core\Pusher.Core.csproj" Description="扫描完成: 项目文件不需要升级。">
+</Event><Event ErrorLevel="0" Project="Pusher" Source="Pusher\Pusher.csproj" Description="扫描完成: 项目文件不需要升级。">
+</Event></UpgradeLog>

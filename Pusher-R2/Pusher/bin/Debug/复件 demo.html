@@ -1,0 +1,30 @@
+<html>
+<head>
+	<title>Goldshowing Demo</title>
+</head>
+<body>
+<div>
+<OBJECT CLASSID="clsid:8ACDC08B-DC64-4613-97F2-299B65F66E1D" width=320 height=240 ID="player_ctrl" codebase="ocxSetup.exe">
+<param name="DEFAULTURL" value="http://srv.goldshowing.com/srv/ad.aspx"/>
+<param name="STUNSERVER" value="p2p.goldshowing.com"/>
+<param name="LOGINSERVER" value="192.168.21.135"/>
+</OBJECT>
+</div>
+<div>
+<span id="tStatus"></span>
+</div>
+
+<script language="JavaScript" for="player_ctrl" event="OnDisplayMsg(msg)">
+	if(msg =='Login p2p server successed')
+	{
+
+		var m_Player = document.getElementById("player_ctrl");		
+		m_Player.PROJECTID=10001;
+		m_Player.Play();
+	}
+
+</script>
+
+</body>
+	
+</html>

@@ -1,0 +1,15 @@
+D:\Codes\LiveShow\Pusher-vEx1\Pusher.Core\bin\Release\Pusher.Core.dll
+D:\Codes\LiveShow\Pusher-vEx1\Pusher.Core\bin\Release\Pusher.Core.pdb
+D:\Codes\LiveShow\Pusher-vEx1\Pusher.Core\obj\Release\ResolveAssemblyReference.cache
+D:\Codes\LiveShow\Pusher-vEx1\Pusher.Core\obj\Release\Pusher.Core.dll
+D:\Codes\LiveShow\Pusher-vEx1\Pusher.Core\obj\Release\Pusher.Core.pdb
+D:\Codes\LiveShow\Pusher-vEx1\Pusher.Core\bin\Debug\Pusher.Core.dll
+D:\Codes\LiveShow\Pusher-vEx1\Pusher.Core\bin\Debug\Pusher.Core.pdb
+D:\Codes\LiveShow\Pusher-vEx1\Pusher.Core\obj\Debug\ResolveAssemblyReference.cache
+D:\Codes\LiveShow\Pusher-vEx1\Pusher.Core\obj\Debug\Pusher.Core.dll
+D:\Codes\LiveShow\Pusher-vEx1\Pusher.Core\obj\Debug\Pusher.Core.pdb
+D:\Codes\LiveShowR2\Pusher-R2\Pusher.Core\bin\Debug\Pusher.Core.dll
+D:\Codes\LiveShowR2\Pusher-R2\Pusher.Core\bin\Debug\Pusher.Core.pdb
+D:\Codes\LiveShowR2\Pusher-R2\Pusher.Core\obj\Debug\ResolveAssemblyReference.cache
+D:\Codes\LiveShowR2\Pusher-R2\Pusher.Core\obj\Debug\Pusher.Core.dll
+D:\Codes\LiveShowR2\Pusher-R2\Pusher.Core\obj\Debug\Pusher.Core.pdb

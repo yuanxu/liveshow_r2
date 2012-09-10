@@ -1,0 +1,10 @@
+bin\Release\Pusher.Core.dll
+bin\Release\Pusher.Core.pdb
+obj\Release\ResolveAssemblyReference.cache
+obj\Release\Pusher.Core.dll
+obj\Release\Pusher.Core.pdb
+bin\Debug\Pusher.Core.dll
+bin\Debug\Pusher.Core.pdb
+obj\Debug\ResolveAssemblyReference.cache
+obj\Debug\Pusher.Core.dll
+obj\Debug\Pusher.Core.pdb

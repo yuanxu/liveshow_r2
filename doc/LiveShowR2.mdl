@@ -1,0 +1,4184 @@
+
+(object Petal
+    version    	50
+    _written   	"Rose 2006.0.0.060314"
+    charSet    	134)
+
+(object Design "Logical View"
+    is_unit    	TRUE
+    is_loaded  	TRUE
+    quid       	"4794685E02EE"
+    enforceClosureAutoLoad 	FALSE
+    defaults   	(object defaults
+	rightMargin 	0.250000
+	leftMargin 	0.250000
+	topMargin  	0.250000
+	bottomMargin 	0.500000
+	pageOverlap 	0.250000
+	clipIconLabels 	TRUE
+	autoResize 	TRUE
+	snapToGrid 	TRUE
+	gridX      	3
+	gridY      	3
+	defaultFont 	(object Font
+	    size       	10
+	    face       	"Arial"
+	    bold       	FALSE
+	    italics    	FALSE
+	    underline  	FALSE
+	    strike     	FALSE
+	    color      	0
+	    default_color 	TRUE)
+	showMessageNum 	3
+	showClassOfObject 	TRUE
+	notation   	"Unified")
+    root_usecase_package 	(object Class_Category "Use Case View"
+	quid       	"4794685E02F0"
+	exportControl 	"Public"
+	global     	TRUE
+	logical_models 	(list unit_reference_list)
+	logical_presentations 	(list unit_reference_list
+	    (object UseCaseDiagram "Main"
+		quid       	"4794686901C6"
+		title      	"Main"
+		zoom       	100
+		max_height 	28350
+		max_width  	21600
+		origin_x   	0
+		origin_y   	0
+		items      	(list diagram_item_list))))
+    root_category 	(object Class_Category "Logical View"
+	quid       	"4794685E02EF"
+	exportControl 	"Public"
+	global     	TRUE
+	subsystem  	"Component View"
+	quidu      	"4794685E02F1"
+	logical_models 	(list unit_reference_list
+	    (object Class "PeerMgr"
+		quid       	"47946A050242"
+		operations 	(list Operations
+		    (object Operation "srv_start"
+			quid       	"4796A6B902EE"
+			concurrency 	"Sequential"
+			opExportControl 	"Public"
+			uid        	0)
+		    (object Operation "clt_start"
+			quid       	"4796A6C40213"
+			concurrency 	"Sequential"
+			opExportControl 	"Public"
+			uid        	0)
+		    (object Operation "stop"
+			quid       	"4796A6D500CB"
+			concurrency 	"Sequential"
+			opExportControl 	"Public"
+			uid        	0))
+		class_attributes 	(list class_attribute_list
+		    (object ClassAttribute "mhdr_"
+			quid       	"479575860222"
+			documentation 	"媒体头"
+			type       	"MediaHeader"
+			quidu      	"479575410222"
+			exportControl 	"Public")
+		    (object ClassAttribute "peerList_"
+			quid       	"47957768009C"
+			exportControl 	"Public")
+		    (object ClassAttribute "buffer_"
+			quid       	"4795895D0251"
+			exportControl 	"Public")
+		    (object ClassAttribute "exBm_"
+			quid       	"47958BF4030D")
+		    (object ClassAttribute "scheduler_"
+			quid       	"47958BFC00DA")
+		    (object ClassAttribute "acceptor_"
+			quid       	"4796A605037A")
+		    (object ClassAttribute "lp_ms_acceptor_"
+			quid       	"47A156BC0196")))
+	    (object Class "Buffer"
+		quid       	"47946A20003E"
+		used_nodes 	(list uses_relationship_list
+		    (object Uses_Relationship
+			quid       	"47B4F66A003E"
+			supplier   	"Logical View::IDeliver"
+			quidu      	"47B4F6480167"))
+		operations 	(list Operations
+		    (object Operation "putData"
+			quid       	"479479B8037A"
+			documentation 	"得到的数据是segment.data的副本"
+			parameters 	(list Parameters
+			    (object Parameter "segId"
+				quid       	"479479D50280"
+				type       	"SEGMENT_ID"
+				quidu      	"479477380138")
+			    (object Parameter "data"
+				quid       	"479479D50290"
+				type       	"MessageBlock*"))
+			concurrency 	"Sequential"
+			opExportControl 	"Public"
+			uid        	0)
+		    (object Operation "getData"
+			quid       	"479479BD0203"
+			parameters 	(list Parameters
+			    (object Parameter "segId"
+				quid       	"479479DA02EE"
+				type       	"SEGMENT_ID"
+				quidu      	"479477380138"))
+			result     	"MessageBlock*"
+			concurrency 	"Sequential"
+			opExportControl 	"Public"
+			uid        	0)
+		    (object Operation "syncId"
+			quid       	"47956D7E02DE"
+			documentation 	"同步ID"
+			parameters 	(list Parameters
+			    (object Parameter "startId"
+				quid       	"47956D8C0399"
+				type       	"SEGMENT_ID"
+				quidu      	"479477380138"))
+			concurrency 	"Sequential"
+			opExportControl 	"Public"
+			uid        	0)
+		    (object Operation "register_deliver"
+			quid       	"47B4F95A008C"
+			concurrency 	"Sequential"
+			opExportControl 	"Public"
+			uid        	0)
+		    (object Operation "unregister_deliver"
+			quid       	"47B4F96101B5"
+			concurrency 	"Sequential"
+			opExportControl 	"Public"
+			uid        	0))
+		class_attributes 	(list class_attribute_list
+		    (object ClassAttribute "startSegId_"
+			quid       	"47947B0F01F4"
+			stereotype 	"SegID")
+		    (object ClassAttribute "map_"
+			quid       	"47A1552F037A"
+			type       	"map<SEGMENT_ID,ACE_MESSAGE_BLOCK*>")
+		    (object ClassAttribute "mutex_"
+			quid       	"47A15548029F"
+			type       	"ACE_Thread_Mutex")
+		    (object ClassAttribute "lp_httpd_list_"
+			quid       	"47C3DA46002E"))
+		module     	"Component View::P2pNet"
+		quidu      	"479468A70213"
+		language   	"VC++")
+	    (object Class "BufferMap"
+		quid       	"47946A8901B5"
+		operations 	(list Operations
+		    (object Operation "set_bit"
+			quid       	"47947AA40222"
+			concurrency 	"Sequential"
+			opExportControl 	"Public"
+			uid        	0)
+		    (object Operation "get_bit"
+			quid       	"47947AA9003E"
+			concurrency 	"Sequential"
+			opExportControl 	"Public"
+			uid        	0)
+		    (object Operation "get_bytes"
+			quid       	"47947ACE0138"
+			documentation 	"转换成Byte数据"
+			result     	"char*"
+			concurrency 	"Sequential"
+			opExportControl 	"Public"
+			uid        	0)
+		    (object Operation "from_Bytes"
+			quid       	"47947AE701E4"
+			documentation 	"由bytes构建"
+			concurrency 	"Sequential"
+			opExportControl 	"Public"
+			uid        	0))
+		class_attributes 	(list class_attribute_list
+		    (object ClassAttribute "bits_"
+			quid       	"479FDE72029F"
+			type       	"BitSet")))
+	    (object Class "Peer"
+		quid       	"47946AF902BF"
+		documentation 	"继承自ACE_Service_Handler"
+		used_nodes 	(list uses_relationship_list
+		    (object Uses_Relationship
+			quid       	"479EA5F8031C"
+			supplier   	"Logical View::PeerMgr"
+			quidu      	"47946A050242")
+		    (object Uses_Relationship
+			quid       	"479EA6120222"
+			supplier   	"Logical View::CmdBase"
+			quidu      	"479579480177"))
+		operations 	(list Operations
+		    (object Operation "putQ"
+			quid       	"47947E22037A"
+			parameters 	(list Parameters
+			    (object Parameter "m"
+				quid       	"47947E2A0128"
+				type       	"OutMessage*"))
+			concurrency 	"Sequential"
+			opExportControl 	"Public"
+			uid        	0)
+		    (object Operation "connect"
+			quid       	"4795603B0261"
+			documentation 	"建立连接"
+			concurrency 	"Sequential"
+			opExportControl 	"Public"
+			uid        	0)
+		    (object Operation "disConnect"
+			quid       	"47956D58004E"
+			concurrency 	"Sequential"
+			opExportControl 	"Public"
+			uid        	0)
+		    (object Operation "open"
+			quid       	"47956F0802FD"
+			concurrency 	"Sequential"
+			opExportControl 	"Implementation"
+			uid        	0)
+		    (object Operation "handle_read_stream"
+			quid       	"47956F0D0213"
+			concurrency 	"Sequential"
+			opExportControl 	"Implementation"
+			uid        	0)
+		    (object Operation "handle_write_stream"
+			quid       	"47956F11030D"
+			concurrency 	"Sequential"
+			opExportControl 	"Implementation"
+			uid        	0)
+		    (object Operation "operator >"
+			quid       	"479571180177"
+			concurrency 	"Sequential"
+			opExportControl 	"Public"
+			uid        	0)
+		    (object Operation "operator ="
+			quid       	"479582D102DE"
+			concurrency 	"Sequential"
+			opExportControl 	"Public"
+			uid        	0))
+		class_attributes 	(list class_attribute_list
+		    (object ClassAttribute "isConnected_"
+			quid       	"479475510222"
+			type       	"bool"
+			exportControl 	"Public")
+		    (object ClassAttribute "mq_"
+			quid       	"47947C3B0148"
+			documentation 	"等发送的消息队列"
+			type       	"vector<smartPTR<OutMessgae*>>")
+		    (object ClassAttribute "peerId_"
+			quid       	"479555AC02BF"
+			type       	"PeerID"
+			exportControl 	"Public")
+		    (object ClassAttribute "reader_"
+			quid       	"4795703901A5")
+		    (object ClassAttribute "writer_"
+			quid       	"4795703F0167")
+		    (object ClassAttribute "bm_"
+			quid       	"4795707F0167"
+			type       	"BufferMap"
+			quidu      	"47946A8901B5"
+			exportControl 	"Public")
+		    (object ClassAttribute "flux_"
+			quid       	"47957084038A"
+			type       	"FluxStatistic"
+			quidu      	"4795704A02EE"
+			exportControl 	"Public")
+		    (object ClassAttribute "addr_"
+			quid       	"4795730600DA"
+			type       	"ACE_Addr"
+			exportControl 	"Public")
+		    (object ClassAttribute "lpMgr_"
+			quid       	"479EA5DB0138"
+			type       	"PeerMgr"
+			quidu      	"47946A050242")
+		    (object ClassAttribute "is_self"
+			quid       	"47A17BFE006D"
+			type       	"bool")
+		    (object ClassAttribute "is_server"
+			quid       	"47A17C0600AB"
+			type       	"bool"))
+		module     	"Component View::P2pNet"
+		quidu      	"479468A70213"
+		language   	"VC++")
+	    (object Class "PeerList"
+		quid       	"4794759C02AF"
+		operations 	(list Operations
+		    (object Operation "join"
+			quid       	"47956127005D"
+			documentation 	"加入peerList"
+			concurrency 	"Sequential"
+			opExportControl 	"Public"
+			uid        	0)
+		    (object Operation "leave"
+			quid       	"4795613001D4"
+			documentation 	"离开"
+			concurrency 	"Sequential"
+			opExportControl 	"Public"
+			uid        	0)
+		    (object Operation "destory"
+			quid       	"479561540251"
+			documentation 	"销毁"
+			concurrency 	"Sequential"
+			opExportControl 	"Public"
+			uid        	0)
+		    (object Operation "next"
+			quid       	"479577C603D8"
+			documentation 	
+|获取下一个节点。
+|如果已最后，则返回NULL
+			
+			result     	"Peer*"
+			concurrency 	"Sequential"
+			opExportControl 	"Public"
+			uid        	0
+			quidu      	"47946AF902BF")
+		    (object Operation "openCursor"
+			quid       	"479578420213"
+			documentation 	"复位当前节点指针到最初位置，并锁定列表"
+			concurrency 	"Sequential"
+			opExportControl 	"Public"
+			uid        	0)
+		    (object Operation "closeCursor"
+			quid       	"4796B3080203"
+			documentation 	"关闭光标指针。并释放列表"
+			concurrency 	"Sequential"
+			opExportControl 	"Public"
+			uid        	0)
+		    (object Operation "getPeer"
+			quid       	"479585E400EA"
+			parameters 	(list Parameters
+			    (object Parameter "peerId"
+				quid       	"479585F20157"
+				type       	"PeerID"))
+			result     	"Peer*"
+			concurrency 	"Sequential"
+			opExportControl 	"Public"
+			uid        	0
+			quidu      	"47946AF902BF"))
+		class_attributes 	(list class_attribute_list
+		    (object ClassAttribute "mutex_"
+			quid       	"479560F60128"
+			type       	"ACE_Mutex")
+		    (object ClassAttribute "currCursor_"
+			quid       	"479577FE0138"
+			type       	"size_t")))
+	    (object Metaclass "SEGMENT_ID"
+		quid       	"479477380138"
+		documentation 	"typedef SegID ACE_UINT32"
+		stereotype 	"typedef"
+		module     	"Component View::P2pNet"
+		quidu      	"479468A70213"
+		language   	"VC++")
+	    (object Class "FluxStatistic"
+		quid       	"4795704A02EE"
+		language   	"VC++")
+	    (object Class "MediaHeader"
+		quid       	"479575410222"
+		operations 	(list Operations
+		    (object Operation "clear"
+			quid       	"479575D0007D"
+			concurrency 	"Sequential"
+			opExportControl 	"Public"
+			uid        	0)
+		    (object Operation "set_data"
+			quid       	"479575D30213"
+			concurrency 	"Sequential"
+			opExportControl 	"Public"
+			uid        	0))
+		class_attributes 	(list class_attribute_list
+		    (object ClassAttribute "dataLen"
+			quid       	"479575B00232"
+			exportControl 	"Public")
+		    (object ClassAttribute "data"
+			quid       	"479575B601A5"
+			type       	"char*"
+			exportControl 	"Public"))
+		language   	"VC++")
+	    (object Class "Scheduler"
+		quid       	"479576D30261"
+		documentation 	
+|调度器。职责是根据当前的buffermap(bm)以及各个已经连接的peer的bmp，请求数据.
+|继承自ACE_Event_Handler
+		
+		used_nodes 	(list uses_relationship_list
+		    (object Uses_Relationship
+			quid       	"4795775D029F"
+			supplier   	"Logical View::PeerList"
+			quidu      	"4794759C02AF"))
+		operations 	(list Operations
+		    (object Operation "handle_timeout"
+			quid       	"4796A3150399"
+			concurrency 	"Sequential"
+			opExportControl 	"Implementation"
+			uid        	0))
+		class_attributes 	(list class_attribute_list
+		    (object ClassAttribute "mgr_"
+			quid       	"47A17D22035B"
+			type       	"PeerMgr&"
+			quidu      	"47946A050242"))
+		language   	"VC++")
+	    (object Class "CmdBase"
+		quid       	"479579480177"
+		operations 	(list Operations
+		    (object Operation "process"
+			quid       	"479587E00157"
+			documentation 	"处理消息"
+			parameters 	(list Parameters
+			    (object Parameter "msg"
+				quid       	"479588DC0148"
+				type       	"MessageBlock*")
+			    (object Parameter "peerMgr"
+				quid       	"47958941034B"
+				type       	"PeerMgr&"
+				quidu      	"47946A050242"))
+			concurrency 	"Sequential"
+			opExportControl 	"Public"
+			uid        	0)
+		    (object Operation "serialize"
+			quid       	"47998B690217"
+			concurrency 	"Sequential"
+			opExportControl 	"Public"
+			uid        	0))
+		class_attributes 	(list class_attribute_list
+		    (object ClassAttribute "mb_"
+			quid       	"479579600232"
+			type       	"MessageBlock*")
+		    (object ClassAttribute "cmd_hdr_"
+			quid       	"47957A00030D"))
+		language   	"VC++")
+	    (object Class "CmdHeader"
+		quid       	"479579BD0203"
+		stereotype 	"struct"
+		class_attributes 	(list class_attribute_list
+		    (object ClassAttribute "cmd_"
+			quid       	"479583510213"
+			type       	"uint16"
+			exportControl 	"Public")
+		    (object ClassAttribute "seqId_"
+			quid       	"479579DA031C"
+			type       	"SeqID"
+			exportControl 	"Public")
+		    (object ClassAttribute "chId_"
+			quid       	"479583560290"
+			type       	"uint32"
+			exportControl 	"Public")
+		    (object ClassAttribute "len_"
+			quid       	"479579E30222"
+			type       	"uint32"
+			exportControl 	"Public"))
+		language   	"VC++")
+	    (object Class "ExBM"
+		quid       	"47958BA40157"
+		documentation 	
+|向各个peer更新BufferMap
+|继承自ACE_Event_Handler
+		
+		operations 	(list Operations
+		    (object Operation "handle_timeout"
+			quid       	"47958BE40109"
+			concurrency 	"Sequential"
+			opExportControl 	"Implementation"
+			uid        	0))
+		class_attributes 	(list class_attribute_list
+		    (object ClassAttribute "mgr_"
+			quid       	"47958BDB0157"
+			type       	"PeerMgr&"
+			quidu      	"47946A050242"))
+		language   	"VC++")
+	    (object Class "mCache"
+		quid       	"47958C690128"
+		operations 	(list Operations
+		    (object Operation "handle_timeout"
+			quid       	"4796A31D02DE"
+			concurrency 	"Sequential"
+			opExportControl 	"Implementation"
+			uid        	0))
+		class_attributes 	(list class_attribute_list
+		    (object ClassAttribute "mgr_"
+			quid       	"47A17D2901C5"
+			type       	"PeerMgr&"
+			quidu      	"47946A050242"))
+		language   	"VC++")
+	    (object Class "PeerAcceptor"
+		quid       	"4796A56F005D"
+		documentation 	
+|监听服务。
+|继承自ACE_Asynch_Acceptor
+		
+		used_nodes 	(list uses_relationship_list
+		    (object Uses_Relationship
+			quid       	"479EA654037A"
+			supplier   	"Logical View::Peer"
+			quidu      	"47946AF902BF"))
+		operations 	(list Operations
+		    (object Operation "open"
+			quid       	"4796A5AD034B"
+			concurrency 	"Sequential"
+			opExportControl 	"Public"
+			uid        	0)
+		    (object Operation "validate_connection"
+			quid       	"4796A5B3001F"
+			concurrency 	"Sequential"
+			opExportControl 	"Implementation"
+			uid        	0))
+		class_attributes 	(list class_attribute_list
+		    (object ClassAttribute "mgr_"
+			quid       	"479EA648001F"
+			type       	"PeerMgr"
+			quidu      	"47946A050242"))
+		language   	"VC++")
+	    (object Class "HttpdAccepter"
+		quid       	"4796A6EE0196"
+		documentation 	
+|本地Httpd服务。
+|只有在运行于客户端模式时有效。
+|这组Acceptor-Connector-List模式可参考Peer相关内容理解。
+|
+|启动时在Buffer中设置回调函数，停止时取消回调函数注册
+		
+		used_nodes 	(list uses_relationship_list
+		    (object Uses_Relationship
+			quid       	"47B4F48100AB"
+			supplier   	"Logical View::HttpdPeer"
+			quidu      	"47B4F44201B5")
+		    (object Uses_Relationship
+			quid       	"47B4F9CD01F4"
+			supplier   	"Logical View::Buffer"
+			quidu      	"47946A20003E"))
+		language   	"VC++")
+	    (object Class "HttpdPeer"
+		quid       	"47B4F44201B5"
+		superclasses 	(list inheritance_relationship_list
+		    (object Inheritance_Relationship
+			quid       	"47B4F93B0186"
+			supplier   	"Logical View::IDeliver"
+			quidu      	"47B4F6480167"))
+		language   	"VC++")
+	    (object Class "IDeliver"
+		quid       	"47B4F6480167"
+		operations 	(list Operations
+		    (object Operation "got_one_second_data"
+			quid       	"47B4F67200DA"
+			concurrency 	"Sequential"
+			opExportControl 	"Public"
+			uid        	0))
+		class_attributes 	(list class_attribute_list
+		    (object ClassAttribute "mgr_"
+			quid       	"47B4F9840148"
+			type       	"PeerMgr"
+			quidu      	"47946A050242"))
+		language   	"VC++")
+	    (object Class "HttpdPeerList"
+		quid       	"47C3DA2900DA"
+		language   	"VC++")
+	    (object Association "$UNNAMED$0"
+		quid       	"47946A90031C"
+		roles      	(list role_list
+		    (object Role "$UNNAMED$1"
+			quid       	"47946A910177"
+			supplier   	"Logical View::BufferMap"
+			quidu      	"47946A8901B5"
+			is_navigable 	TRUE)
+		    (object Role "$UNNAMED$2"
+			quid       	"47946A910179"
+			supplier   	"Logical View::Buffer"
+			quidu      	"47946A20003E")))
+	    (object Association "$UNNAMED$3"
+		quid       	"47946ADF032C"
+		roles      	(list role_list
+		    (object Role "$UNNAMED$4"
+			quid       	"47946AE00157"
+			supplier   	"Logical View::Buffer"
+			quidu      	"47946A20003E"
+			is_navigable 	TRUE)
+		    (object Role "$UNNAMED$5"
+			quid       	"47946AE00159"
+			supplier   	"Logical View::PeerMgr"
+			quidu      	"47946A050242")))
+	    (object Association "$UNNAMED$6"
+		quid       	"479475B0031C"
+		roles      	(list role_list
+		    (object Role "$UNNAMED$7"
+			quid       	"479475B10232"
+			supplier   	"Logical View::Peer"
+			quidu      	"47946AF902BF"
+			is_navigable 	TRUE)
+		    (object Role "$UNNAMED$8"
+			quid       	"479475B10234"
+			supplier   	"Logical View::PeerList"
+			quidu      	"4794759C02AF"
+			is_aggregate 	TRUE)))
+	    (object Association "$UNNAMED$9"
+		quid       	"47947C180290"
+		roles      	(list role_list
+		    (object Role "$UNNAMED$10"
+			quid       	"47947C1900FA"
+			supplier   	"Logical View::BufferMap"
+			quidu      	"47946A8901B5"
+			is_navigable 	TRUE)
+		    (object Role "$UNNAMED$11"
+			quid       	"47947C1900FC"
+			supplier   	"Logical View::Peer"
+			quidu      	"47946AF902BF")))
+	    (object Association "$UNNAMED$12"
+		quid       	"4795707902AF"
+		roles      	(list role_list
+		    (object Role "$UNNAMED$13"
+			quid       	"4795707903C8"
+			supplier   	"Logical View::FluxStatistic"
+			quidu      	"4795704A02EE"
+			is_navigable 	TRUE)
+		    (object Role "$UNNAMED$14"
+			quid       	"4795707903CA"
+			supplier   	"Logical View::Peer"
+			quidu      	"47946AF902BF")))
+	    (object Association "$UNNAMED$15"
+		quid       	"4795755F01C5"
+		roles      	(list role_list
+		    (object Role "$UNNAMED$16"
+			quid       	"47957560008C"
+			supplier   	"Logical View::MediaHeader"
+			quidu      	"479575410222"
+			is_navigable 	TRUE)
+		    (object Role "$UNNAMED$17"
+			quid       	"47957560008E"
+			supplier   	"Logical View::PeerMgr"
+			quidu      	"47946A050242")))
+	    (object Association "$UNNAMED$18"
+		quid       	"479579FA0232"
+		roles      	(list role_list
+		    (object Role "$UNNAMED$19"
+			quid       	"479579FB00CB"
+			supplier   	"Logical View::CmdHeader"
+			quidu      	"479579BD0203"
+			is_navigable 	TRUE)
+		    (object Role "$UNNAMED$20"
+			quid       	"479579FB00DA"
+			supplier   	"Logical View::CmdBase"
+			quidu      	"479579480177")))
+	    (object Association "$UNNAMED$21"
+		quid       	"47958BE6036B"
+		roles      	(list role_list
+		    (object Role "$UNNAMED$22"
+			quid       	"47958BE701A5"
+			supplier   	"Logical View::ExBM"
+			quidu      	"47958BA40157"
+			is_navigable 	TRUE)
+		    (object Role "$UNNAMED$23"
+			quid       	"47958BE701A7"
+			supplier   	"Logical View::PeerMgr"
+			quidu      	"47946A050242")))
+	    (object Association "$UNNAMED$24"
+		quid       	"47958BEC0119"
+		roles      	(list role_list
+		    (object Role "$UNNAMED$25"
+			quid       	"47958BEC0222"
+			supplier   	"Logical View::Scheduler"
+			quidu      	"479576D30261"
+			is_navigable 	TRUE)
+		    (object Role "$UNNAMED$26"
+			quid       	"47958BEC0224"
+			supplier   	"Logical View::PeerMgr"
+			quidu      	"47946A050242")))
+	    (object Association "$UNNAMED$27"
+		quid       	"47958C200128"
+		roles      	(list role_list
+		    (object Role "$UNNAMED$28"
+			quid       	"47958C20037A"
+			supplier   	"Logical View::PeerList"
+			quidu      	"4794759C02AF"
+			is_navigable 	TRUE)
+		    (object Role "$UNNAMED$29"
+			quid       	"47958C20037C"
+			supplier   	"Logical View::PeerMgr"
+			quidu      	"47946A050242")))
+	    (object Association "$UNNAMED$30"
+		quid       	"47958C7A02AF"
+		roles      	(list role_list
+		    (object Role "$UNNAMED$31"
+			quid       	"47958C7B00FA"
+			supplier   	"Logical View::mCache"
+			quidu      	"47958C690128"
+			is_navigable 	TRUE)
+		    (object Role "$UNNAMED$32"
+			quid       	"47958C7B00FC"
+			supplier   	"Logical View::PeerMgr"
+			quidu      	"47946A050242")))
+	    (object Association "$UNNAMED$33"
+		quid       	"4796A60000DA"
+		roles      	(list role_list
+		    (object Role "$UNNAMED$34"
+			quid       	"4796A60002FD"
+			supplier   	"Logical View::PeerAcceptor"
+			quidu      	"4796A56F005D"
+			is_navigable 	TRUE)
+		    (object Role "$UNNAMED$35"
+			quid       	"4796A60002FF"
+			supplier   	"Logical View::PeerMgr"
+			quidu      	"47946A050242")))
+	    (object Association "$UNNAMED$36"
+		quid       	"4796A7170167"
+		roles      	(list role_list
+		    (object Role "$UNNAMED$37"
+			quid       	"4796A718007D"
+			supplier   	"Logical View::HttpdAccepter"
+			quidu      	"4796A6EE0196"
+			is_navigable 	TRUE)
+		    (object Role "$UNNAMED$38"
+			quid       	"4796A718007F"
+			supplier   	"Logical View::PeerMgr"
+			quidu      	"47946A050242")))
+	    (object Association "$UNNAMED$39"
+		quid       	"47C3DA36036B"
+		roles      	(list role_list
+		    (object Role "$UNNAMED$40"
+			quid       	"47C3DA370167"
+			supplier   	"Logical View::HttpdPeerList"
+			quidu      	"47C3DA2900DA"
+			is_navigable 	TRUE)
+		    (object Role "$UNNAMED$41"
+			quid       	"47C3DA370169"
+			supplier   	"Logical View::Buffer"
+			quidu      	"47946A20003E")))
+	    (object Association "$UNNAMED$42"
+		quid       	"47C3DA3B01A5"
+		roles      	(list role_list
+		    (object Role "$UNNAMED$43"
+			quid       	"47C3DA3B037A"
+			supplier   	"Logical View::HttpdPeer"
+			quidu      	"47B4F44201B5"
+			is_navigable 	TRUE)
+		    (object Role "$UNNAMED$44"
+			quid       	"47C3DA3B037C"
+			supplier   	"Logical View::HttpdPeerList"
+			quidu      	"47C3DA2900DA"
+			is_aggregate 	TRUE))))
+	logical_presentations 	(list unit_reference_list
+	    (object ClassDiagram "Main"
+		quid       	"4794686901E4"
+		title      	"Main"
+		zoom       	100
+		max_height 	28350
+		max_width  	21600
+		origin_x   	1138
+		origin_y   	1670
+		items      	(list diagram_item_list
+		    (object ClassView "MetaClass" "Logical View::SEGMENT_ID" @1
+			ShowCompartmentStereotypes 	TRUE
+			SuppressAttribute 	TRUE
+			SuppressOperation 	TRUE
+			IncludeAttribute 	TRUE
+			IncludeOperation 	TRUE
+			location   	(657, 231)
+			font       	(object Font
+			    size       	10
+			    face       	"Arial"
+			    bold       	FALSE
+			    italics    	FALSE
+			    underline  	FALSE
+			    strike     	FALSE
+			    color      	0
+			    default_color 	TRUE)
+			label      	(object ItemLabel
+			    Parent_View 	@1
+			    location   	(512, 215)
+			    fill_color 	13434879
+			    nlines     	1
+			    max_width  	290
+			    justify    	0
+			    label      	"SEGMENT_ID")
+			stereotype 	(object ItemLabel
+			    Parent_View 	@1
+			    location   	(512, 165)
+			    fill_color 	13434879
+			    anchor     	10
+			    nlines     	1
+			    max_width  	290
+			    justify    	0
+			    label      	"<<typedef>>")
+			icon_style 	"Icon"
+			line_color 	3342489
+			fill_color 	13434879
+			quidu      	"479477380138"
+			width      	308
+			height     	157
+			annotation 	8
+			autoResize 	TRUE)
+		    (object ClassView "Class" "Logical View::CmdHeader" @2
+			ShowCompartmentStereotypes 	TRUE
+			IncludeAttribute 	TRUE
+			IncludeOperation 	TRUE
+			location   	(3189, 1476)
+			font       	(object Font
+			    size       	10
+			    face       	"Arial"
+			    bold       	FALSE
+			    italics    	FALSE
+			    underline  	FALSE
+			    strike     	FALSE
+			    color      	0
+			    default_color 	TRUE)
+			label      	(object ItemLabel
+			    Parent_View 	@2
+			    location   	(3030, 1342)
+			    fill_color 	13434879
+			    nlines     	1
+			    max_width  	318
+			    justify    	0
+			    label      	"CmdHeader")
+			stereotype 	(object ItemLabel
+			    Parent_View 	@2
+			    location   	(3030, 1292)
+			    fill_color 	13434879
+			    anchor     	10
+			    nlines     	1
+			    max_width  	318
+			    justify    	0
+			    label      	"<<struct>>")
+			icon_style 	"Icon"
+			line_color 	3342489
+			fill_color 	13434879
+			quidu      	"479579BD0203"
+			compartment 	(object Compartment
+			    Parent_View 	@2
+			    location   	(3030, 1403)
+			    font       	(object Font
+				size       	10
+				face       	"Arial"
+				bold       	FALSE
+				italics    	FALSE
+				underline  	FALSE
+				strike     	FALSE
+				color      	0
+				default_color 	TRUE)
+			    icon_style 	"Icon"
+			    fill_color 	13434879
+			    anchor     	2
+			    nlines     	5
+			    max_width  	325
+			    justify    	1)
+			width      	336
+			height     	392
+			annotation 	8
+			autoResize 	TRUE)
+		    (object ClassView "Class" "Logical View::CmdBase" @3
+			ShowCompartmentStereotypes 	TRUE
+			IncludeAttribute 	TRUE
+			IncludeOperation 	TRUE
+			location   	(2607, 1533)
+			font       	(object Font
+			    size       	10
+			    face       	"Arial"
+			    bold       	FALSE
+			    italics    	FALSE
+			    underline  	FALSE
+			    strike     	FALSE
+			    color      	0
+			    default_color 	TRUE)
+			label      	(object ItemLabel
+			    Parent_View 	@3
+			    location   	(2381, 1377)
+			    fill_color 	13434879
+			    nlines     	1
+			    max_width  	452
+			    justify    	0
+			    label      	"CmdBase")
+			icon_style 	"Icon"
+			line_color 	3342489
+			fill_color 	13434879
+			quidu      	"479579480177"
+			compartment 	(object Compartment
+			    Parent_View 	@3
+			    location   	(2381, 1438)
+			    font       	(object Font
+				size       	10
+				face       	"Arial"
+				bold       	FALSE
+				italics    	FALSE
+				underline  	FALSE
+				strike     	FALSE
+				color      	0
+				default_color 	TRUE)
+			    icon_style 	"Icon"
+			    fill_color 	13434879
+			    anchor     	2
+			    nlines     	5
+			    max_width  	459
+			    justify    	1)
+			width      	470
+			height     	336
+			annotation 	8
+			autoResize 	TRUE)
+		    (object AssociationViewNew "$UNNAMED$18" @4
+			location   	(2931, 1500)
+			font       	(object Font
+			    size       	10
+			    face       	"Arial"
+			    bold       	FALSE
+			    italics    	FALSE
+			    underline  	FALSE
+			    strike     	FALSE
+			    color      	0
+			    default_color 	TRUE)
+			stereotype 	TRUE
+			line_color 	3342489
+			quidu      	"479579FA0232"
+			roleview_list 	(list RoleViews
+			    (object RoleView "$UNNAMED$19" @5
+				Parent_View 	@4
+				location   	(384, 600)
+				stereotype 	TRUE
+				line_color 	3342489
+				quidu      	"479579FB00CB"
+				client     	@4
+				supplier   	@2
+				vertices   	(list Points
+				    (2931, 1500)
+				    (3020, 1491))
+				line_style 	0)
+			    (object RoleView "$UNNAMED$20" @6
+				Parent_View 	@4
+				location   	(384, 600)
+				stereotype 	TRUE
+				line_color 	3342489
+				quidu      	"479579FB00DA"
+				client     	@4
+				supplier   	@3
+				vertices   	(list Points
+				    (2931, 1500)
+				    (2842, 1508))
+				line_style 	0)))
+		    (object ClassView "Class" "Logical View::BufferMap" @7
+			ShowCompartmentStereotypes 	TRUE
+			IncludeAttribute 	TRUE
+			IncludeOperation 	TRUE
+			location   	(2391, 2163)
+			font       	(object Font
+			    size       	10
+			    face       	"Arial"
+			    bold       	FALSE
+			    italics    	FALSE
+			    underline  	FALSE
+			    strike     	FALSE
+			    color      	0
+			    default_color 	TRUE)
+			label      	(object ItemLabel
+			    Parent_View 	@7
+			    location   	(2246, 1982)
+			    fill_color 	13434879
+			    nlines     	1
+			    max_width  	290
+			    justify    	0
+			    label      	"BufferMap")
+			icon_style 	"Icon"
+			line_color 	3342489
+			fill_color 	13434879
+			quidu      	"47946A8901B5"
+			compartment 	(object Compartment
+			    Parent_View 	@7
+			    location   	(2246, 2043)
+			    font       	(object Font
+				size       	10
+				face       	"Arial"
+				bold       	FALSE
+				italics    	FALSE
+				underline  	FALSE
+				strike     	FALSE
+				color      	0
+				default_color 	TRUE)
+			    icon_style 	"Icon"
+			    fill_color 	13434879
+			    anchor     	2
+			    nlines     	6
+			    max_width  	296
+			    justify    	1)
+			width      	308
+			height     	386
+			annotation 	8
+			autoResize 	TRUE)
+		    (object ClassView "Class" "Logical View::FluxStatistic" @8
+			ShowCompartmentStereotypes 	TRUE
+			IncludeAttribute 	TRUE
+			IncludeOperation 	TRUE
+			location   	(2403, 2640)
+			font       	(object Font
+			    size       	10
+			    face       	"Arial"
+			    bold       	FALSE
+			    italics    	FALSE
+			    underline  	FALSE
+			    strike     	FALSE
+			    color      	0
+			    default_color 	TRUE)
+			label      	(object ItemLabel
+			    Parent_View 	@8
+			    location   	(2273, 2588)
+			    fill_color 	13434879
+			    nlines     	1
+			    max_width  	260
+			    justify    	0
+			    label      	"FluxStatistic")
+			icon_style 	"Icon"
+			line_color 	3342489
+			fill_color 	13434879
+			quidu      	"4795704A02EE"
+			width      	278
+			height     	128
+			annotation 	8
+			autoResize 	TRUE)
+		    (object ClassView "Class" "Logical View::Peer" @9
+			ShowCompartmentStereotypes 	TRUE
+			IncludeAttribute 	TRUE
+			IncludeOperation 	TRUE
+			location   	(1659, 2424)
+			font       	(object Font
+			    size       	10
+			    face       	"Arial"
+			    bold       	FALSE
+			    italics    	FALSE
+			    underline  	FALSE
+			    strike     	FALSE
+			    color      	0
+			    default_color 	TRUE)
+			label      	(object ItemLabel
+			    Parent_View 	@9
+			    location   	(1258, 1893)
+			    fill_color 	13434879
+			    nlines     	1
+			    max_width  	802
+			    justify    	0
+			    label      	"Peer")
+			icon_style 	"Icon"
+			line_color 	3342489
+			fill_color 	13434879
+			quidu      	"47946AF902BF"
+			compartment 	(object Compartment
+			    Parent_View 	@9
+			    location   	(1258, 1954)
+			    font       	(object Font
+				size       	10
+				face       	"Arial"
+				bold       	FALSE
+				italics    	FALSE
+				underline  	FALSE
+				strike     	FALSE
+				color      	0
+				default_color 	TRUE)
+			    icon_style 	"Icon"
+			    fill_color 	13434879
+			    anchor     	2
+			    nlines     	20
+			    max_width  	809
+			    justify    	1)
+			width      	820
+			height     	1086
+			annotation 	8
+			autoResize 	TRUE)
+		    (object AssociationViewNew "$UNNAMED$9" @10
+			location   	(2152, 2246)
+			font       	(object Font
+			    size       	10
+			    face       	"Arial"
+			    bold       	FALSE
+			    italics    	FALSE
+			    underline  	FALSE
+			    strike     	FALSE
+			    color      	0
+			    default_color 	TRUE)
+			stereotype 	TRUE
+			line_color 	3342489
+			quidu      	"47947C180290"
+			roleview_list 	(list RoleViews
+			    (object RoleView "$UNNAMED$10" @11
+				Parent_View 	@10
+				location   	(1062, 730)
+				stereotype 	TRUE
+				line_color 	3342489
+				quidu      	"47947C1900FA"
+				client     	@10
+				supplier   	@7
+				vertices   	(list Points
+				    (2152, 2246)
+				    (2236, 2215))
+				line_style 	0)
+			    (object RoleView "$UNNAMED$11" @12
+				Parent_View 	@10
+				location   	(1062, 730)
+				stereotype 	TRUE
+				line_color 	3342489
+				quidu      	"47947C1900FC"
+				client     	@10
+				supplier   	@9
+				vertices   	(list Points
+				    (2152, 2246)
+				    (2069, 2274))
+				line_style 	0)))
+		    (object AssociationViewNew "$UNNAMED$12" @13
+			location   	(2166, 2570)
+			font       	(object Font
+			    size       	10
+			    face       	"Arial"
+			    bold       	FALSE
+			    italics    	FALSE
+			    underline  	FALSE
+			    strike     	FALSE
+			    color      	0
+			    default_color 	TRUE)
+			stereotype 	TRUE
+			line_color 	3342489
+			quidu      	"4795707902AF"
+			roleview_list 	(list RoleViews
+			    (object RoleView "$UNNAMED$13" @14
+				Parent_View 	@13
+				location   	(1164, 632)
+				stereotype 	TRUE
+				line_color 	3342489
+				quidu      	"4795707903C8"
+				client     	@13
+				supplier   	@8
+				vertices   	(list Points
+				    (2166, 2570)
+				    (2263, 2599))
+				line_style 	0)
+			    (object RoleView "$UNNAMED$14" @15
+				Parent_View 	@13
+				location   	(1164, 632)
+				stereotype 	TRUE
+				line_color 	3342489
+				quidu      	"4795707903CA"
+				client     	@13
+				supplier   	@9
+				vertices   	(list Points
+				    (2166, 2570)
+				    (2069, 2542))
+				line_style 	0)))
+		    (object UsesView "" @16
+			stereotype 	TRUE
+			line_color 	3342489
+			quidu      	"479EA6120222"
+			client     	@9
+			supplier   	@3
+			vertices   	(list Points
+			    (2069, 2036)
+			    (2426, 1701))
+			line_style 	0)
+		    (object ClassView "Class" "Logical View::BufferMap" @17
+			ShowCompartmentStereotypes 	TRUE
+			IncludeAttribute 	TRUE
+			IncludeOperation 	TRUE
+			location   	(1185, 192)
+			font       	(object Font
+			    size       	10
+			    face       	"Arial"
+			    bold       	FALSE
+			    italics    	FALSE
+			    underline  	FALSE
+			    strike     	FALSE
+			    color      	0
+			    default_color 	TRUE)
+			label      	(object ItemLabel
+			    Parent_View 	@17
+			    location   	(1040, 11)
+			    fill_color 	13434879
+			    nlines     	1
+			    max_width  	290
+			    justify    	0
+			    label      	"BufferMap")
+			icon_style 	"Icon"
+			line_color 	3342489
+			fill_color 	13434879
+			quidu      	"47946A8901B5"
+			compartment 	(object Compartment
+			    Parent_View 	@17
+			    location   	(1040, 72)
+			    font       	(object Font
+				size       	10
+				face       	"Arial"
+				bold       	FALSE
+				italics    	FALSE
+				underline  	FALSE
+				strike     	FALSE
+				color      	0
+				default_color 	TRUE)
+			    icon_style 	"Icon"
+			    fill_color 	13434879
+			    anchor     	2
+			    nlines     	6
+			    max_width  	296
+			    justify    	1)
+			width      	308
+			height     	386
+			annotation 	8
+			autoResize 	TRUE)
+		    (object ClassView "Class" "Logical View::MediaHeader" @18
+			ShowCompartmentStereotypes 	TRUE
+			IncludeAttribute 	TRUE
+			IncludeOperation 	TRUE
+			location   	(822, 579)
+			font       	(object Font
+			    size       	10
+			    face       	"Arial"
+			    bold       	FALSE
+			    italics    	FALSE
+			    underline  	FALSE
+			    strike     	FALSE
+			    color      	0
+			    default_color 	TRUE)
+			label      	(object ItemLabel
+			    Parent_View 	@18
+			    location   	(685, 423)
+			    fill_color 	13434879
+			    nlines     	1
+			    max_width  	274
+			    justify    	0
+			    label      	"MediaHeader")
+			icon_style 	"Icon"
+			line_color 	3342489
+			fill_color 	13434879
+			quidu      	"479575410222"
+			compartment 	(object Compartment
+			    Parent_View 	@18
+			    location   	(685, 484)
+			    font       	(object Font
+				size       	10
+				face       	"Arial"
+				bold       	FALSE
+				italics    	FALSE
+				underline  	FALSE
+				strike     	FALSE
+				color      	0
+				default_color 	TRUE)
+			    icon_style 	"Icon"
+			    fill_color 	13434879
+			    anchor     	2
+			    nlines     	5
+			    max_width  	268
+			    justify    	1)
+			width      	292
+			height     	336
+			annotation 	8
+			autoResize 	TRUE)
+		    (object ClassView "Class" "Logical View::ExBM" @19
+			ShowCompartmentStereotypes 	TRUE
+			IncludeAttribute 	TRUE
+			IncludeOperation 	TRUE
+			location   	(225, 1053)
+			font       	(object Font
+			    size       	10
+			    face       	"Arial"
+			    bold       	FALSE
+			    italics    	FALSE
+			    underline  	FALSE
+			    strike     	FALSE
+			    color      	0
+			    default_color 	TRUE)
+			label      	(object ItemLabel
+			    Parent_View 	@19
+			    location   	(44, 947)
+			    fill_color 	13434879
+			    nlines     	1
+			    max_width  	362
+			    justify    	0
+			    label      	"ExBM")
+			icon_style 	"Icon"
+			line_color 	3342489
+			fill_color 	13434879
+			quidu      	"47958BA40157"
+			compartment 	(object Compartment
+			    Parent_View 	@19
+			    location   	(44, 1008)
+			    font       	(object Font
+				size       	10
+				face       	"Arial"
+				bold       	FALSE
+				italics    	FALSE
+				underline  	FALSE
+				strike     	FALSE
+				color      	0
+				default_color 	TRUE)
+			    icon_style 	"Icon"
+			    fill_color 	13434879
+			    anchor     	2
+			    nlines     	3
+			    max_width  	368
+			    justify    	1)
+			width      	380
+			height     	236
+			annotation 	8
+			autoResize 	TRUE)
+		    (object ClassView "Class" "Logical View::Scheduler" @20
+			ShowCompartmentStereotypes 	TRUE
+			IncludeAttribute 	TRUE
+			IncludeOperation 	TRUE
+			location   	(225, 1419)
+			font       	(object Font
+			    size       	10
+			    face       	"Arial"
+			    bold       	FALSE
+			    italics    	FALSE
+			    underline  	FALSE
+			    strike     	FALSE
+			    color      	0
+			    default_color 	TRUE)
+			label      	(object ItemLabel
+			    Parent_View 	@20
+			    location   	(44, 1313)
+			    fill_color 	13434879
+			    nlines     	1
+			    max_width  	362
+			    justify    	0
+			    label      	"Scheduler")
+			icon_style 	"Icon"
+			line_color 	3342489
+			fill_color 	13434879
+			quidu      	"479576D30261"
+			compartment 	(object Compartment
+			    Parent_View 	@20
+			    location   	(44, 1374)
+			    font       	(object Font
+				size       	10
+				face       	"Arial"
+				bold       	FALSE
+				italics    	FALSE
+				underline  	FALSE
+				strike     	FALSE
+				color      	0
+				default_color 	TRUE)
+			    icon_style 	"Icon"
+			    fill_color 	13434879
+			    anchor     	2
+			    nlines     	3
+			    max_width  	368
+			    justify    	1)
+			width      	380
+			height     	236
+			annotation 	8
+			autoResize 	TRUE)
+		    (object ClassView "Class" "Logical View::PeerList" @21
+			ShowCompartmentStereotypes 	TRUE
+			IncludeAttribute 	TRUE
+			IncludeOperation 	TRUE
+			location   	(639, 2463)
+			font       	(object Font
+			    size       	10
+			    face       	"Arial"
+			    bold       	FALSE
+			    italics    	FALSE
+			    underline  	FALSE
+			    strike     	FALSE
+			    color      	0
+			    default_color 	TRUE)
+			label      	(object ItemLabel
+			    Parent_View 	@21
+			    location   	(417, 2182)
+			    fill_color 	13434879
+			    nlines     	1
+			    max_width  	444
+			    justify    	0
+			    label      	"PeerList")
+			icon_style 	"Icon"
+			line_color 	3342489
+			fill_color 	13434879
+			quidu      	"4794759C02AF"
+			compartment 	(object Compartment
+			    Parent_View 	@21
+			    location   	(417, 2243)
+			    font       	(object Font
+				size       	10
+				face       	"Arial"
+				bold       	FALSE
+				italics    	FALSE
+				underline  	FALSE
+				strike     	FALSE
+				color      	0
+				default_color 	TRUE)
+			    icon_style 	"Icon"
+			    fill_color 	16777215
+			    anchor     	2
+			    nlines     	10
+			    max_width  	450
+			    justify    	1)
+			width      	462
+			height     	586
+			annotation 	8
+			autoResize 	TRUE)
+		    (object AssociationViewNew "$UNNAMED$6" @22
+			location   	(1059, 2445)
+			font       	(object Font
+			    size       	10
+			    face       	"Arial"
+			    bold       	FALSE
+			    italics    	FALSE
+			    underline  	FALSE
+			    strike     	FALSE
+			    color      	0
+			    default_color 	TRUE)
+			stereotype 	TRUE
+			line_color 	3342489
+			quidu      	"479475B0031C"
+			roleview_list 	(list RoleViews
+			    (object RoleView "$UNNAMED$7" @23
+				Parent_View 	@22
+				location   	(487, 1167)
+				stereotype 	TRUE
+				line_color 	3342489
+				quidu      	"479475B10232"
+				client     	@22
+				supplier   	@9
+				vertices   	(list Points
+				    (1059, 2445)
+				    (1248, 2436))
+				line_style 	0)
+			    (object RoleView "$UNNAMED$8" @24
+				Parent_View 	@22
+				location   	(487, 1167)
+				stereotype 	TRUE
+				line_color 	3342489
+				quidu      	"479475B10234"
+				client     	@22
+				supplier   	@21
+				vertices   	(list Points
+				    (1059, 2445)
+				    (870, 2452))
+				line_style 	0)))
+		    (object UsesView "" @25
+			stereotype 	TRUE
+			line_color 	3342489
+			quidu      	"4795775D029F"
+			client     	@20
+			supplier   	@21
+			vertices   	(list Points
+			    (270, 1537)
+			    (522, 2169))
+			line_style 	0)
+		    (object ClassView "Class" "Logical View::mCache" @26
+			ShowCompartmentStereotypes 	TRUE
+			IncludeAttribute 	TRUE
+			IncludeOperation 	TRUE
+			location   	(264, 498)
+			font       	(object Font
+			    size       	10
+			    face       	"Arial"
+			    bold       	FALSE
+			    italics    	FALSE
+			    underline  	FALSE
+			    strike     	FALSE
+			    color      	0
+			    default_color 	TRUE)
+			label      	(object ItemLabel
+			    Parent_View 	@26
+			    location   	(83, 392)
+			    fill_color 	13434879
+			    nlines     	1
+			    max_width  	362
+			    justify    	0
+			    label      	"mCache")
+			icon_style 	"Icon"
+			line_color 	3342489
+			fill_color 	13434879
+			quidu      	"47958C690128"
+			compartment 	(object Compartment
+			    Parent_View 	@26
+			    location   	(83, 453)
+			    font       	(object Font
+				size       	10
+				face       	"Arial"
+				bold       	FALSE
+				italics    	FALSE
+				underline  	FALSE
+				strike     	FALSE
+				color      	0
+				default_color 	TRUE)
+			    icon_style 	"Icon"
+			    fill_color 	13434879
+			    anchor     	2
+			    nlines     	3
+			    max_width  	368
+			    justify    	1)
+			width      	380
+			height     	236
+			annotation 	8
+			autoResize 	TRUE)
+		    (object ClassView "Class" "Logical View::PeerAcceptor" @27
+			ShowCompartmentStereotypes 	TRUE
+			IncludeAttribute 	TRUE
+			IncludeOperation 	TRUE
+			location   	(1716, 1647)
+			font       	(object Font
+			    size       	10
+			    face       	"Arial"
+			    bold       	FALSE
+			    italics    	FALSE
+			    underline  	FALSE
+			    strike     	FALSE
+			    color      	0
+			    default_color 	TRUE)
+			label      	(object ItemLabel
+			    Parent_View 	@27
+			    location   	(1500, 1516)
+			    fill_color 	13434879
+			    nlines     	1
+			    max_width  	432
+			    justify    	0
+			    label      	"PeerAcceptor")
+			icon_style 	"Icon"
+			line_color 	3342489
+			fill_color 	13434879
+			quidu      	"4796A56F005D"
+			compartment 	(object Compartment
+			    Parent_View 	@27
+			    location   	(1500, 1577)
+			    font       	(object Font
+				size       	10
+				face       	"Arial"
+				bold       	FALSE
+				italics    	FALSE
+				underline  	FALSE
+				strike     	FALSE
+				color      	0
+				default_color 	TRUE)
+			    icon_style 	"Icon"
+			    fill_color 	13434879
+			    anchor     	2
+			    nlines     	4
+			    max_width  	437
+			    justify    	1)
+			width      	450
+			height     	286
+			annotation 	8
+			autoResize 	TRUE)
+		    (object UsesView "" @28
+			stereotype 	TRUE
+			line_color 	3342489
+			quidu      	"479EA654037A"
+			client     	@27
+			supplier   	@9
+			vertices   	(list Points
+			    (1704, 1790)
+			    (1697, 1880))
+			line_style 	0)
+		    (object ClassView "Class" "Logical View::HttpdAccepter" @29
+			ShowCompartmentStereotypes 	TRUE
+			IncludeAttribute 	TRUE
+			IncludeOperation 	TRUE
+			location   	(1446, 1272)
+			font       	(object Font
+			    size       	10
+			    face       	"Arial"
+			    bold       	FALSE
+			    italics    	FALSE
+			    underline  	FALSE
+			    strike     	FALSE
+			    color      	0
+			    default_color 	TRUE)
+			label      	(object ItemLabel
+			    Parent_View 	@29
+			    location   	(1299, 1221)
+			    fill_color 	13434879
+			    nlines     	1
+			    max_width  	294
+			    justify    	0
+			    label      	"HttpdAccepter")
+			icon_style 	"Icon"
+			line_color 	3342489
+			fill_color 	13434879
+			quidu      	"4796A6EE0196"
+			width      	312
+			height     	126
+			annotation 	8
+			autoResize 	TRUE)
+		    (object ClassView "Class" "Logical View::PeerMgr" @30
+			ShowCompartmentStereotypes 	TRUE
+			IncludeAttribute 	TRUE
+			IncludeOperation 	TRUE
+			location   	(957, 1287)
+			font       	(object Font
+			    size       	10
+			    face       	"Arial"
+			    bold       	FALSE
+			    italics    	FALSE
+			    underline  	FALSE
+			    strike     	FALSE
+			    color      	0
+			    default_color 	TRUE)
+			label      	(object ItemLabel
+			    Parent_View 	@30
+			    location   	(736, 981)
+			    fill_color 	13434879
+			    nlines     	1
+			    max_width  	442
+			    justify    	0
+			    label      	"PeerMgr")
+			icon_style 	"Icon"
+			line_color 	3342489
+			fill_color 	13434879
+			quidu      	"47946A050242"
+			compartment 	(object Compartment
+			    Parent_View 	@30
+			    location   	(736, 1042)
+			    font       	(object Font
+				size       	10
+				face       	"Arial"
+				bold       	FALSE
+				italics    	FALSE
+				underline  	FALSE
+				strike     	FALSE
+				color      	0
+				default_color 	TRUE)
+			    icon_style 	"Icon"
+			    fill_color 	16777215
+			    anchor     	2
+			    nlines     	11
+			    max_width  	446
+			    justify    	1)
+			width      	460
+			height     	636
+			annotation 	8
+			autoResize 	TRUE)
+		    (object AssociationViewNew "$UNNAMED$15" @31
+			location   	(873, 857)
+			font       	(object Font
+			    size       	10
+			    face       	"Arial"
+			    bold       	FALSE
+			    italics    	FALSE
+			    underline  	FALSE
+			    strike     	FALSE
+			    color      	0
+			    default_color 	TRUE)
+			stereotype 	TRUE
+			line_color 	3342489
+			quidu      	"4795755F01C5"
+			roleview_list 	(list RoleViews
+			    (object RoleView "$UNNAMED$16" @32
+				Parent_View 	@31
+				location   	(459, -238)
+				stereotype 	TRUE
+				line_color 	3342489
+				quidu      	"47957560008C"
+				client     	@31
+				supplier   	@18
+				vertices   	(list Points
+				    (873, 857)
+				    (852, 747))
+				line_style 	0)
+			    (object RoleView "$UNNAMED$17" @33
+				Parent_View 	@31
+				location   	(459, -238)
+				stereotype 	TRUE
+				line_color 	3342489
+				quidu      	"47957560008E"
+				client     	@31
+				supplier   	@30
+				vertices   	(list Points
+				    (873, 857)
+				    (894, 968))
+				line_style 	0)))
+		    (object AssociationViewNew "$UNNAMED$21" @34
+			location   	(570, 1162)
+			font       	(object Font
+			    size       	10
+			    face       	"Arial"
+			    bold       	FALSE
+			    italics    	FALSE
+			    underline  	FALSE
+			    strike     	FALSE
+			    color      	0
+			    default_color 	TRUE)
+			stereotype 	TRUE
+			line_color 	3342489
+			quidu      	"47958BE6036B"
+			roleview_list 	(list RoleViews
+			    (object RoleView "$UNNAMED$22" @35
+				Parent_View 	@34
+				location   	(-318, 61)
+				stereotype 	TRUE
+				line_color 	3342489
+				quidu      	"47958BE701A5"
+				client     	@34
+				supplier   	@19
+				vertices   	(list Points
+				    (570, 1162)
+				    (415, 1112))
+				line_style 	0)
+			    (object RoleView "$UNNAMED$23" @36
+				Parent_View 	@34
+				location   	(-318, 61)
+				stereotype 	TRUE
+				line_color 	3342489
+				quidu      	"47958BE701A7"
+				client     	@34
+				supplier   	@30
+				vertices   	(list Points
+				    (570, 1162)
+				    (726, 1212))
+				line_style 	0)))
+		    (object AssociationViewNew "$UNNAMED$24" @37
+			location   	(570, 1355)
+			font       	(object Font
+			    size       	10
+			    face       	"Arial"
+			    bold       	FALSE
+			    italics    	FALSE
+			    underline  	FALSE
+			    strike     	FALSE
+			    color      	0
+			    default_color 	TRUE)
+			stereotype 	TRUE
+			line_color 	3342489
+			quidu      	"47958BEC0119"
+			roleview_list 	(list RoleViews
+			    (object RoleView "$UNNAMED$25" @38
+				Parent_View 	@37
+				location   	(-318, 254)
+				stereotype 	TRUE
+				line_color 	3342489
+				quidu      	"47958BEC0222"
+				client     	@37
+				supplier   	@20
+				vertices   	(list Points
+				    (570, 1355)
+				    (415, 1383))
+				line_style 	0)
+			    (object RoleView "$UNNAMED$26" @39
+				Parent_View 	@37
+				location   	(-318, 254)
+				stereotype 	TRUE
+				line_color 	3342489
+				quidu      	"47958BEC0224"
+				client     	@37
+				supplier   	@30
+				vertices   	(list Points
+				    (570, 1355)
+				    (726, 1327))
+				line_style 	0)))
+		    (object AssociationViewNew "$UNNAMED$27" @40
+			location   	(793, 1887)
+			font       	(object Font
+			    size       	10
+			    face       	"Arial"
+			    bold       	FALSE
+			    italics    	FALSE
+			    underline  	FALSE
+			    strike     	FALSE
+			    color      	0
+			    default_color 	TRUE)
+			stereotype 	TRUE
+			line_color 	3342489
+			quidu      	"47958C200128"
+			roleview_list 	(list RoleViews
+			    (object RoleView "$UNNAMED$28" @41
+				Parent_View 	@40
+				location   	(-134, 765)
+				stereotype 	TRUE
+				line_color 	3342489
+				quidu      	"47958C20037A"
+				client     	@40
+				supplier   	@21
+				vertices   	(list Points
+				    (793, 1887)
+				    (717, 2169))
+				line_style 	0)
+			    (object RoleView "$UNNAMED$29" @42
+				Parent_View 	@40
+				location   	(-134, 765)
+				stereotype 	TRUE
+				line_color 	3342489
+				quidu      	"47958C20037C"
+				client     	@40
+				supplier   	@30
+				vertices   	(list Points
+				    (793, 1887)
+				    (869, 1605))
+				line_style 	0)))
+		    (object AssociationViewNew "$UNNAMED$30" @43
+			location   	(546, 820)
+			font       	(object Font
+			    size       	10
+			    face       	"Arial"
+			    bold       	FALSE
+			    italics    	FALSE
+			    underline  	FALSE
+			    strike     	FALSE
+			    color      	0
+			    default_color 	TRUE)
+			stereotype 	TRUE
+			line_color 	3342489
+			quidu      	"47958C7A02AF"
+			roleview_list 	(list RoleViews
+			    (object RoleView "$UNNAMED$31" @44
+				Parent_View 	@43
+				location   	(-381, -302)
+				stereotype 	TRUE
+				line_color 	3342489
+				quidu      	"47958C7B00FA"
+				client     	@43
+				supplier   	@26
+				vertices   	(list Points
+				    (546, 820)
+				    (367, 616))
+				line_style 	0)
+			    (object RoleView "$UNNAMED$32" @45
+				Parent_View 	@43
+				location   	(-381, -302)
+				stereotype 	TRUE
+				line_color 	3342489
+				quidu      	"47958C7B00FC"
+				client     	@43
+				supplier   	@30
+				vertices   	(list Points
+				    (546, 820)
+				    (726, 1024))
+				line_style 	0)))
+		    (object AssociationViewNew "$UNNAMED$33" @46
+			location   	(1338, 1467)
+			font       	(object Font
+			    size       	10
+			    face       	"Arial"
+			    bold       	FALSE
+			    italics    	FALSE
+			    underline  	FALSE
+			    strike     	FALSE
+			    color      	0
+			    default_color 	TRUE)
+			stereotype 	TRUE
+			line_color 	3342489
+			quidu      	"4796A60000DA"
+			roleview_list 	(list RoleViews
+			    (object RoleView "$UNNAMED$34" @47
+				Parent_View 	@46
+				location   	(411, 345)
+				stereotype 	TRUE
+				line_color 	3342489
+				quidu      	"4796A60002FD"
+				client     	@46
+				supplier   	@27
+				vertices   	(list Points
+				    (1338, 1467)
+				    (1490, 1538))
+				line_style 	0)
+			    (object RoleView "$UNNAMED$35" @48
+				Parent_View 	@46
+				location   	(411, 345)
+				stereotype 	TRUE
+				line_color 	3342489
+				quidu      	"4796A60002FF"
+				client     	@46
+				supplier   	@30
+				vertices   	(list Points
+				    (1338, 1467)
+				    (1187, 1395))
+				line_style 	0)))
+		    (object UsesView "" @49
+			stereotype 	TRUE
+			line_color 	3342489
+			quidu      	"479EA5F8031C"
+			client     	@9
+			supplier   	@30
+			vertices   	(list Points
+			    (1322, 1880)
+			    (1153, 1605))
+			line_style 	0)
+		    (object AssociationViewNew "$UNNAMED$36" @50
+			location   	(1238, 1277)
+			font       	(object Font
+			    size       	10
+			    face       	"Arial"
+			    bold       	FALSE
+			    italics    	FALSE
+			    underline  	FALSE
+			    strike     	FALSE
+			    color      	0
+			    default_color 	TRUE)
+			stereotype 	TRUE
+			line_color 	3342489
+			quidu      	"4796A7170167"
+			roleview_list 	(list RoleViews
+			    (object RoleView "$UNNAMED$37" @51
+				Parent_View 	@50
+				location   	(311, 155)
+				stereotype 	TRUE
+				line_color 	3342489
+				quidu      	"4796A718007D"
+				client     	@50
+				supplier   	@29
+				vertices   	(list Points
+				    (1238, 1277)
+				    (1289, 1276))
+				line_style 	0)
+			    (object RoleView "$UNNAMED$38" @52
+				Parent_View 	@50
+				location   	(311, 155)
+				stereotype 	TRUE
+				line_color 	3342489
+				quidu      	"4796A718007F"
+				client     	@50
+				supplier   	@30
+				vertices   	(list Points
+				    (1238, 1277)
+				    (1187, 1279))
+				line_style 	0)))
+		    (object ClassView "Class" "Logical View::IDeliver" @53
+			ShowCompartmentStereotypes 	TRUE
+			IncludeAttribute 	TRUE
+			IncludeOperation 	TRUE
+			location   	(2160, 1131)
+			font       	(object Font
+			    size       	10
+			    face       	"Arial"
+			    bold       	FALSE
+			    italics    	FALSE
+			    underline  	FALSE
+			    strike     	FALSE
+			    color      	0
+			    default_color 	TRUE)
+			label      	(object ItemLabel
+			    Parent_View 	@53
+			    location   	(1923, 1025)
+			    fill_color 	13434879
+			    nlines     	1
+			    max_width  	474
+			    justify    	0
+			    label      	"IDeliver")
+			icon_style 	"Icon"
+			line_color 	3342489
+			fill_color 	13434879
+			quidu      	"47B4F6480167"
+			compartment 	(object Compartment
+			    Parent_View 	@53
+			    location   	(1923, 1086)
+			    font       	(object Font
+				size       	10
+				face       	"Arial"
+				bold       	FALSE
+				italics    	FALSE
+				underline  	FALSE
+				strike     	FALSE
+				color      	0
+				default_color 	TRUE)
+			    icon_style 	"Icon"
+			    fill_color 	13434879
+			    anchor     	2
+			    nlines     	3
+			    max_width  	481
+			    justify    	1)
+			width      	492
+			height     	236
+			annotation 	8
+			autoResize 	TRUE)
+		    (object ClassView "Class" "Logical View::Buffer" @54
+			ShowCompartmentStereotypes 	TRUE
+			IncludeAttribute 	TRUE
+			IncludeOperation 	TRUE
+			location   	(1689, 657)
+			font       	(object Font
+			    size       	10
+			    face       	"Arial"
+			    bold       	FALSE
+			    italics    	FALSE
+			    underline  	FALSE
+			    strike     	FALSE
+			    color      	0
+			    default_color 	TRUE)
+			label      	(object ItemLabel
+			    Parent_View 	@54
+			    location   	(1150, 376)
+			    fill_color 	13434879
+			    nlines     	1
+			    max_width  	1078
+			    justify    	0
+			    label      	"Buffer")
+			icon_style 	"Icon"
+			line_color 	3342489
+			fill_color 	13434879
+			quidu      	"47946A20003E"
+			compartment 	(object Compartment
+			    Parent_View 	@54
+			    location   	(1150, 437)
+			    font       	(object Font
+				size       	10
+				face       	"Arial"
+				bold       	FALSE
+				italics    	FALSE
+				underline  	FALSE
+				strike     	FALSE
+				color      	0
+				default_color 	TRUE)
+			    icon_style 	"Icon"
+			    fill_color 	13434879
+			    anchor     	2
+			    nlines     	10
+			    max_width  	1076
+			    justify    	1)
+			width      	1096
+			height     	586
+			annotation 	8
+			autoResize 	TRUE)
+		    (object AssociationViewNew "$UNNAMED$0" @55
+			location   	(1437, 424)
+			font       	(object Font
+			    size       	10
+			    face       	"Arial"
+			    bold       	FALSE
+			    italics    	FALSE
+			    underline  	FALSE
+			    strike     	FALSE
+			    color      	0
+			    default_color 	TRUE)
+			stereotype 	TRUE
+			line_color 	3342489
+			quidu      	"47946A90031C"
+			roleview_list 	(list RoleViews
+			    (object RoleView "$UNNAMED$1" @56
+				Parent_View 	@55
+				location   	(618, -252)
+				stereotype 	TRUE
+				line_color 	3342489
+				quidu      	"47946A910177"
+				client     	@55
+				supplier   	@17
+				vertices   	(list Points
+				    (1437, 424)
+				    (1185, 192))
+				line_style 	0)
+			    (object RoleView "$UNNAMED$2" @57
+				Parent_View 	@55
+				location   	(618, -252)
+				stereotype 	TRUE
+				line_color 	3342489
+				quidu      	"47946A910179"
+				client     	@55
+				supplier   	@54
+				vertices   	(list Points
+				    (1437, 424)
+				    (1689, 657))
+				line_style 	0)))
+		    (object AssociationViewNew "$UNNAMED$3" @58
+			location   	(1266, 1018)
+			font       	(object Font
+			    size       	10
+			    face       	"Arial"
+			    bold       	FALSE
+			    italics    	FALSE
+			    underline  	FALSE
+			    strike     	FALSE
+			    color      	0
+			    default_color 	TRUE)
+			stereotype 	TRUE
+			line_color 	3342489
+			quidu      	"47946ADF032C"
+			roleview_list 	(list RoleViews
+			    (object RoleView "$UNNAMED$4" @59
+				Parent_View 	@58
+				location   	(505, -47)
+				stereotype 	TRUE
+				line_color 	3342489
+				quidu      	"47946AE00157"
+				client     	@58
+				supplier   	@54
+				vertices   	(list Points
+				    (1266, 1018)
+				    (1346, 950))
+				line_style 	0)
+			    (object RoleView "$UNNAMED$5" @60
+				Parent_View 	@58
+				location   	(505, -47)
+				stereotype 	TRUE
+				line_color 	3342489
+				quidu      	"47946AE00159"
+				client     	@58
+				supplier   	@30
+				vertices   	(list Points
+				    (1266, 1018)
+				    (1187, 1086))
+				line_style 	0)))
+		    (object UsesView "" @61
+			stereotype 	TRUE
+			line_color 	3342489
+			quidu      	"47B4F66A003E"
+			client     	@54
+			supplier   	@53
+			vertices   	(list Points
+			    (1980, 950)
+			    (2042, 1012))
+			line_style 	0)
+		    (object UsesView "" @62
+			stereotype 	TRUE
+			line_color 	3342489
+			quidu      	"47B4F9CD01F4"
+			client     	@29
+			supplier   	@54
+			vertices   	(list Points
+			    (1470, 1208)
+			    (1571, 950))
+			line_style 	0)
+		    (object ClassView "Class" "Logical View::HttpdPeerList" @63
+			ShowCompartmentStereotypes 	TRUE
+			IncludeAttribute 	TRUE
+			IncludeOperation 	TRUE
+			location   	(1701, 1125)
+			font       	(object Font
+			    size       	10
+			    face       	"Arial"
+			    bold       	FALSE
+			    italics    	FALSE
+			    underline  	FALSE
+			    strike     	FALSE
+			    color      	0
+			    default_color 	TRUE)
+			label      	(object ItemLabel
+			    Parent_View 	@63
+			    location   	(1561, 1074)
+			    fill_color 	13434879
+			    nlines     	1
+			    max_width  	280
+			    justify    	0
+			    label      	"HttpdPeerList")
+			icon_style 	"Icon"
+			line_color 	3342489
+			fill_color 	13434879
+			quidu      	"47C3DA2900DA"
+			width      	298
+			height     	126
+			annotation 	8
+			autoResize 	TRUE)
+		    (object AssociationViewNew "$UNNAMED$39" @64
+			location   	(1697, 1005)
+			font       	(object Font
+			    size       	10
+			    face       	"Arial"
+			    bold       	FALSE
+			    italics    	FALSE
+			    underline  	FALSE
+			    strike     	FALSE
+			    color      	0
+			    default_color 	TRUE)
+			stereotype 	TRUE
+			line_color 	3342489
+			quidu      	"47C3DA36036B"
+			roleview_list 	(list RoleViews
+			    (object RoleView "$UNNAMED$40" @65
+				Parent_View 	@64
+				location   	(8, 348)
+				stereotype 	TRUE
+				line_color 	3342489
+				quidu      	"47C3DA370167"
+				client     	@64
+				supplier   	@63
+				vertices   	(list Points
+				    (1697, 1005)
+				    (1698, 1061))
+				line_style 	0)
+			    (object RoleView "$UNNAMED$41" @66
+				Parent_View 	@64
+				location   	(8, 348)
+				stereotype 	TRUE
+				line_color 	3342489
+				quidu      	"47C3DA370169"
+				client     	@64
+				supplier   	@54
+				vertices   	(list Points
+				    (1697, 1005)
+				    (1696, 950))
+				line_style 	0)))
+		    (object ClassView "Class" "Logical View::HttpdPeer" @67
+			ShowCompartmentStereotypes 	TRUE
+			IncludeAttribute 	TRUE
+			IncludeOperation 	TRUE
+			location   	(1779, 1395)
+			font       	(object Font
+			    size       	10
+			    face       	"Arial"
+			    bold       	FALSE
+			    italics    	FALSE
+			    underline  	FALSE
+			    strike     	FALSE
+			    color      	0
+			    default_color 	TRUE)
+			label      	(object ItemLabel
+			    Parent_View 	@67
+			    location   	(1674, 1344)
+			    fill_color 	13434879
+			    nlines     	1
+			    max_width  	210
+			    justify    	0
+			    label      	"HttpdPeer")
+			icon_style 	"Icon"
+			line_color 	3342489
+			fill_color 	13434879
+			quidu      	"47B4F44201B5"
+			width      	228
+			height     	126
+			annotation 	8
+			autoResize 	TRUE)
+		    (object UsesView "" @68
+			stereotype 	TRUE
+			line_color 	3342489
+			quidu      	"47B4F48100AB"
+			client     	@29
+			supplier   	@67
+			vertices   	(list Points
+			    (1602, 1329)
+			    (1664, 1352))
+			line_style 	0)
+		    (object InheritView "" @69
+			stereotype 	TRUE
+			line_color 	3342489
+			quidu      	"47B4F93B0186"
+			client     	@67
+			supplier   	@53
+			vertices   	(list Points
+			    (1870, 1331)
+			    (1987, 1249))
+			line_style 	0)
+		    (object AssociationViewNew "$UNNAMED$42" @70
+			location   	(1739, 1259)
+			font       	(object Font
+			    size       	10
+			    face       	"Arial"
+			    bold       	FALSE
+			    italics    	FALSE
+			    underline  	FALSE
+			    strike     	FALSE
+			    color      	0
+			    default_color 	TRUE)
+			stereotype 	TRUE
+			line_color 	3342489
+			quidu      	"47C3DA3B01A5"
+			roleview_list 	(list RoleViews
+			    (object RoleView "$UNNAMED$43" @71
+				Parent_View 	@70
+				location   	(41, 140)
+				stereotype 	TRUE
+				line_color 	3342489
+				quidu      	"47C3DA3B037A"
+				client     	@70
+				supplier   	@67
+				vertices   	(list Points
+				    (1739, 1259)
+				    (1760, 1331))
+				line_style 	0)
+			    (object RoleView "$UNNAMED$44" @72
+				Parent_View 	@70
+				location   	(41, 140)
+				stereotype 	TRUE
+				line_color 	3342489
+				quidu      	"47C3DA3B037C"
+				client     	@70
+				supplier   	@63
+				vertices   	(list Points
+				    (1739, 1259)
+				    (1718, 1188))
+				line_style 	0)))))))
+    root_subsystem 	(object SubSystem "Component View"
+	quid       	"4794685E02F1"
+	physical_models 	(list unit_reference_list
+	    (object module "P2pNet" "NotAModuleType" "NotAModulePart"
+		quid       	"479468A70213"
+		stereotype 	"DLL"
+		language   	"VC++"
+		class      	"Logical View::Peer"
+		quidu      	"47946AF902BF"
+		class      	"Logical View::SEGMENT_ID"
+		quidu      	"479477380138"
+		class      	"Logical View::Buffer"
+		quidu      	"47946A20003E")
+	    (object module "LiveShow" "NotAModuleType" "NotAModulePart"
+		quid       	"479468CC01F4"
+		stereotype 	"DLL"
+		visible_modules 	(list dependency_list
+		    (object Module_Visibility_Relationship
+			quid       	"479468ED01F4"
+			supplier   	"Component View::P2pNet"
+			quidu      	"479468A70213"
+			supplier_is_spec 	TRUE))
+		language   	"VC++"))
+	physical_presentations 	(list unit_reference_list
+	    (object Module_Diagram "Main"
+		quid       	"4794686901C5"
+		title      	"Main"
+		zoom       	100
+		max_height 	28350
+		max_width  	21600
+		origin_x   	0
+		origin_y   	0
+		items      	(list diagram_item_list
+		    (object ModView "Component View::P2pNet" "NotAModuleType" "NotAModulePart" @73
+			location   	(360, 774)
+			font       	(object Font
+			    size       	10
+			    face       	"Arial"
+			    bold       	FALSE
+			    italics    	FALSE
+			    underline  	FALSE
+			    strike     	FALSE
+			    color      	0
+			    default_color 	TRUE)
+			label      	(object ItemLabel
+			    Parent_View 	@73
+			    location   	(325, 749)
+			    fill_color 	13434879
+			    anchor_loc 	3
+			    nlines     	2
+			    max_width  	128
+			    justify    	1
+			    label      	"P2pNet")
+			icon       	"DLL"
+			icon_style 	"Icon"
+			line_color 	3342489
+			fill_color 	13434879
+			quidu      	"479468A70213"
+			width      	230
+			autoResize 	TRUE
+			width      	230
+			height     	162)
+		    (object ModView "Component View::LiveShow" "NotAModuleType" "NotAModulePart" @74
+			location   	(822, 756)
+			font       	(object Font
+			    size       	10
+			    face       	"Arial"
+			    bold       	FALSE
+			    italics    	FALSE
+			    underline  	FALSE
+			    strike     	FALSE
+			    color      	0
+			    default_color 	TRUE)
+			label      	(object ItemLabel
+			    Parent_View 	@74
+			    location   	(772, 730)
+			    fill_color 	13434879
+			    anchor_loc 	3
+			    nlines     	2
+			    max_width  	184
+			    justify    	1
+			    label      	"LiveShow")
+			icon       	"DLL"
+			icon_style 	"Icon"
+			line_color 	3342489
+			fill_color 	13434879
+			quidu      	"479468CC01F4"
+			width      	332
+			height     	169
+			autoResize 	TRUE
+			width      	332
+			height     	169)
+		    (object ModVisView "" @75
+			stereotype 	TRUE
+			line_color 	3342489
+			quidu      	"479468ED01F4"
+			client     	@74
+			supplier   	@73
+			vertices   	(list Points
+			    (656, 760)
+			    (472, 766))
+			line_style 	0))))
+	category   	"Logical View"
+	quidu      	"4794685E02EF")
+    process_structure 	(object Processes
+	quid       	"4794685E02F2"
+	ProcsNDevs 	(list
+	    (object Process_Diagram "Deployment View"
+		quid       	"4794685E02F4"
+		title      	"Deployment View"
+		zoom       	100
+		max_height 	28350
+		max_width  	21600
+		origin_x   	0
+		origin_y   	0
+		items      	(list diagram_item_list))))
+    properties 	(object Properties
+	attributes 	(list Attribute_Set
+	    (object Attribute
+		tool       	"Cplusplus"
+		name       	"propertyId"
+		value      	"809135966")
+	    (object Attribute
+		tool       	"Cplusplus"
+		name       	"default__Role"
+		value      	(list Attribute_Set
+		    (object Attribute
+			tool       	"Cplusplus"
+			name       	"Synchronize"
+			value      	TRUE)
+		    (object Attribute
+			tool       	"Cplusplus"
+			name       	"CodeName"
+			value      	"")
+		    (object Attribute
+			tool       	"Cplusplus"
+			name       	"InitialValue"
+			value      	"")))
+	    (object Attribute
+		tool       	"Cplusplus"
+		name       	"default__Inherit"
+		value      	(list Attribute_Set
+		    (object Attribute
+			tool       	"Cplusplus"
+			name       	"Synchronize"
+			value      	TRUE)))
+	    (object Attribute
+		tool       	"Cplusplus"
+		name       	"default__Module-Spec"
+		value      	(list Attribute_Set
+		    (object Attribute
+			tool       	"Cplusplus"
+			name       	"Synchronize"
+			value      	TRUE)
+		    (object Attribute
+			tool       	"Cplusplus"
+			name       	"RevEngRootDirectory"
+			value      	"")
+		    (object Attribute
+			tool       	"Cplusplus"
+			name       	"RootPackage"
+			value      	"C++ Reverse Engineered")
+		    (object Attribute
+			tool       	"Cplusplus"
+			name       	"RevEngDirectoriesAsPackages"
+			value      	FALSE)
+		    (object Attribute
+			tool       	"Cplusplus"
+			name       	"HeaderFileExtension"
+			value      	".h")
+		    (object Attribute
+			tool       	"Cplusplus"
+			name       	"ImplementationFileExtension"
+			value      	".cpp")
+		    (object Attribute
+			tool       	"Cplusplus"
+			name       	"NewHeaderFileDirectory"
+			value      	"")
+		    (object Attribute
+			tool       	"Cplusplus"
+			name       	"NewImplementationFileDirectory"
+			value      	"")
+		    (object Attribute
+			tool       	"Cplusplus"
+			name       	"FileCapitalization"
+			value      	("FileCapitalizationSet" 0))
+		    (object Attribute
+			tool       	"Cplusplus"
+			name       	"CodeGenExtraDirectories"
+			value      	("CodeGenExtraDirectoriesSet" 0))
+		    (object Attribute
+			tool       	"Cplusplus"
+			name       	"StripClassPrefix"
+			value      	"")
+		    (object Attribute
+			tool       	"Cplusplus"
+			name       	"UseTabs"
+			value      	FALSE)
+		    (object Attribute
+			tool       	"Cplusplus"
+			name       	"TabWidth"
+			value      	8)
+		    (object Attribute
+			tool       	"Cplusplus"
+			name       	"IndentWidth"
+			value      	4)
+		    (object Attribute
+			tool       	"Cplusplus"
+			name       	"AccessIndentation"
+			value      	-2)
+		    (object Attribute
+			tool       	"Cplusplus"
+			name       	"CreateBackupFiles"
+			value      	FALSE)
+		    (object Attribute
+			tool       	"Cplusplus"
+			name       	"ModelIdCommentRules"
+			value      	("ModelIdCommentRulesSet" 1))
+		    (object Attribute
+			tool       	"Cplusplus"
+			name       	"CommentRules"
+			value      	("CommentRulesSet" 1))
+		    (object Attribute
+			tool       	"Cplusplus"
+			name       	"PageWidth"
+			value      	80)
+		    (object Attribute
+			tool       	"Cplusplus"
+			name       	"ClassMemberOrder"
+			value      	("MemberOrderSet" 1))
+		    (object Attribute
+			tool       	"Cplusplus"
+			name       	"OneParameterPerLine"
+			value      	FALSE)
+		    (object Attribute
+			tool       	"Cplusplus"
+			name       	"NamespaceBraceStyle"
+			value      	("BraceStyleSet" 1))
+		    (object Attribute
+			tool       	"Cplusplus"
+			name       	"ClassBraceStyle"
+			value      	("BraceStyleSet" 2))
+		    (object Attribute
+			tool       	"Cplusplus"
+			name       	"FunctionBraceStyle"
+			value      	("BraceStyleSet" 2))
+		    (object Attribute
+			tool       	"Cplusplus"
+			name       	"CommentStyleProperty"
+			value      	("CommentStyleSet" 1))
+		    (object Attribute
+			tool       	"Cplusplus"
+			name       	"Copyright"
+			value      	(value Text ""))
+		    (object Attribute
+			tool       	"Cplusplus"
+			name       	"InitialHeaderIncludes"
+			value      	(value Text ""))
+		    (object Attribute
+			tool       	"Cplusplus"
+			name       	"InitialBodyIncludes"
+			value      	(value Text ""))
+		    (object Attribute
+			tool       	"Cplusplus"
+			name       	"CodeGenExtraDirectoriesSet"
+			value      	(list Attribute_Set
+			    (object Attribute
+				tool       	"Cplusplus"
+				name       	"None"
+				value      	0)
+			    (object Attribute
+				tool       	"Cplusplus"
+				name       	"Namespaces"
+				value      	1)
+			    (object Attribute
+				tool       	"Cplusplus"
+				name       	"Packages"
+				value      	2)))
+		    (object Attribute
+			tool       	"Cplusplus"
+			name       	"FileCapitalizationSet"
+			value      	(list Attribute_Set
+			    (object Attribute
+				tool       	"Cplusplus"
+				name       	"Same as model"
+				value      	0)
+			    (object Attribute
+				tool       	"Cplusplus"
+				name       	"Lower case"
+				value      	1)
+			    (object Attribute
+				tool       	"Cplusplus"
+				name       	"Upper case"
+				value      	2)
+			    (object Attribute
+				tool       	"Cplusplus"
+				name       	"Lower case with underscores"
+				value      	3)))
+		    (object Attribute
+			tool       	"Cplusplus"
+			name       	"CommentStyleSet"
+			value      	(list Attribute_Set
+			    (object Attribute
+				tool       	"Cplusplus"
+				name       	"C++ Comment"
+				value      	1)
+			    (object Attribute
+				tool       	"Cplusplus"
+				name       	"C Comment"
+				value      	2)
+			    (object Attribute
+				tool       	"Cplusplus"
+				name       	"XML Comment"
+				value      	3)
+			    (object Attribute
+				tool       	"Cplusplus"
+				name       	"JavaDoc Comment"
+				value      	4)))
+		    (object Attribute
+			tool       	"Cplusplus"
+			name       	"BraceStyleSet"
+			value      	(list Attribute_Set
+			    (object Attribute
+				tool       	"Cplusplus"
+				name       	"B1"
+				value      	1)
+			    (object Attribute
+				tool       	"Cplusplus"
+				name       	"B2"
+				value      	2)
+			    (object Attribute
+				tool       	"Cplusplus"
+				name       	"B3"
+				value      	3)
+			    (object Attribute
+				tool       	"Cplusplus"
+				name       	"B4"
+				value      	4)
+			    (object Attribute
+				tool       	"Cplusplus"
+				name       	"B5"
+				value      	5)))
+		    (object Attribute
+			tool       	"Cplusplus"
+			name       	"MemberOrderSet"
+			value      	(list Attribute_Set
+			    (object Attribute
+				tool       	"Cplusplus"
+				name       	"Public First"
+				value      	1)
+			    (object Attribute
+				tool       	"Cplusplus"
+				name       	"Private First"
+				value      	2)
+			    (object Attribute
+				tool       	"Cplusplus"
+				name       	"Order by kind"
+				value      	3)
+			    (object Attribute
+				tool       	"Cplusplus"
+				name       	"Unordered"
+				value      	4)))
+		    (object Attribute
+			tool       	"Cplusplus"
+			name       	"ModelIdCommentRulesSet"
+			value      	(list Attribute_Set
+			    (object Attribute
+				tool       	"Cplusplus"
+				name       	"Code generation only"
+				value      	1)
+			    (object Attribute
+				tool       	"Cplusplus"
+				name       	"Code generation and reverse engineering"
+				value      	2)
+			    (object Attribute
+				tool       	"Cplusplus"
+				name       	"Never generate model IDs"
+				value      	3)))
+		    (object Attribute
+			tool       	"Cplusplus"
+			name       	"CommentRulesSet"
+			value      	(list Attribute_Set
+			    (object Attribute
+				tool       	"Cplusplus"
+				name       	"Always synchronize"
+				value      	1)
+			    (object Attribute
+				tool       	"Cplusplus"
+				name       	"Code generation only"
+				value      	2)
+			    (object Attribute
+				tool       	"Cplusplus"
+				name       	"Reverse engineering only"
+				value      	3)
+			    (object Attribute
+				tool       	"Cplusplus"
+				name       	"Never synchronize"
+				value      	4)))))
+	    (object Attribute
+		tool       	"Cplusplus"
+		name       	"default__Module-Body"
+		value      	(list Attribute_Set
+		    (object Attribute
+			tool       	"Cplusplus"
+			name       	"Synchronize"
+			value      	TRUE)
+		    (object Attribute
+			tool       	"Cplusplus"
+			name       	"RevEngRootDirectory"
+			value      	"")
+		    (object Attribute
+			tool       	"Cplusplus"
+			name       	"RootPackage"
+			value      	"C++ Reverse Engineered")
+		    (object Attribute
+			tool       	"Cplusplus"
+			name       	"RevEngDirectoriesAsPackages"
+			value      	FALSE)
+		    (object Attribute
+			tool       	"Cplusplus"
+			name       	"HeaderFileExtension"
+			value      	".h")
+		    (object Attribute
+			tool       	"Cplusplus"
+			name       	"ImplementationFileExtension"
+			value      	".cpp")
+		    (object Attribute
+			tool       	"Cplusplus"
+			name       	"NewHeaderFileDirectory"
+			value      	"")
+		    (object Attribute
+			tool       	"Cplusplus"
+			name       	"NewImplementationFileDirectory"
+			value      	"")
+		    (object Attribute
+			tool       	"Cplusplus"
+			name       	"FileCapitalization"
+			value      	("FileCapitalizationSet" 0))
+		    (object Attribute
+			tool       	"Cplusplus"
+			name       	"CodeGenExtraDirectories"
+			value      	("CodeGenExtraDirectoriesSet" 0))
+		    (object Attribute
+			tool       	"Cplusplus"
+			name       	"StripClassPrefix"
+			value      	"")
+		    (object Attribute
+			tool       	"Cplusplus"
+			name       	"UseTabs"
+			value      	FALSE)
+		    (object Attribute
+			tool       	"Cplusplus"
+			name       	"TabWidth"
+			value      	8)
+		    (object Attribute
+			tool       	"Cplusplus"
+			name       	"IndentWidth"
+			value      	4)
+		    (object Attribute
+			tool       	"Cplusplus"
+			name       	"AccessIndentation"
+			value      	-2)
+		    (object Attribute
+			tool       	"Cplusplus"
+			name       	"CreateBackupFiles"
+			value      	FALSE)
+		    (object Attribute
+			tool       	"Cplusplus"
+			name       	"ModelIdCommentRules"
+			value      	("ModelIdCommentRulesSet" 1))
+		    (object Attribute
+			tool       	"Cplusplus"
+			name       	"CommentRules"
+			value      	("CommentRulesSet" 1))
+		    (object Attribute
+			tool       	"Cplusplus"
+			name       	"PageWidth"
+			value      	80)
+		    (object Attribute
+			tool       	"Cplusplus"
+			name       	"ClassMemberOrder"
+			value      	("MemberOrderSet" 1))
+		    (object Attribute
+			tool       	"Cplusplus"
+			name       	"OneParameterPerLine"
+			value      	FALSE)
+		    (object Attribute
+			tool       	"Cplusplus"
+			name       	"NamespaceBraceStyle"
+			value      	("BraceStyleSet" 2))
+		    (object Attribute
+			tool       	"Cplusplus"
+			name       	"ClassBraceStyle"
+			value      	("BraceStyleSet" 2))
+		    (object Attribute
+			tool       	"Cplusplus"
+			name       	"FunctionBraceStyle"
+			value      	("BraceStyleSet" 2))
+		    (object Attribute
+			tool       	"Cplusplus"
+			name       	"CommentStyleProperty"
+			value      	("CommentStyleSet" 1))
+		    (object Attribute
+			tool       	"Cplusplus"
+			name       	"Copyright"
+			value      	(value Text ""))
+		    (object Attribute
+			tool       	"Cplusplus"
+			name       	"InitialHeaderIncludes"
+			value      	(value Text ""))
+		    (object Attribute
+			tool       	"Cplusplus"
+			name       	"InitialBodyIncludes"
+			value      	(value Text ""))
+		    (object Attribute
+			tool       	"Cplusplus"
+			name       	"CodeGenExtraDirectoriesSet"
+			value      	(list Attribute_Set
+			    (object Attribute
+				tool       	"Cplusplus"
+				name       	"None"
+				value      	0)
+			    (object Attribute
+				tool       	"Cplusplus"
+				name       	"Namespaces"
+				value      	1)
+			    (object Attribute
+				tool       	"Cplusplus"
+				name       	"Packages"
+				value      	2)))
+		    (object Attribute
+			tool       	"Cplusplus"
+			name       	"FileCapitalizationSet"
+			value      	(list Attribute_Set
+			    (object Attribute
+				tool       	"Cplusplus"
+				name       	"Same as model"
+				value      	0)
+			    (object Attribute
+				tool       	"Cplusplus"
+				name       	"Lower case"
+				value      	1)
+			    (object Attribute
+				tool       	"Cplusplus"
+				name       	"Upper case"
+				value      	2)
+			    (object Attribute
+				tool       	"Cplusplus"
+				name       	"Lower case with underscores"
+				value      	3)))
+		    (object Attribute
+			tool       	"Cplusplus"
+			name       	"CommentStyleSet"
+			value      	(list Attribute_Set
+			    (object Attribute
+				tool       	"Cplusplus"
+				name       	"C++ Comment"
+				value      	1)
+			    (object Attribute
+				tool       	"Cplusplus"
+				name       	"C Comment"
+				value      	2)
+			    (object Attribute
+				tool       	"Cplusplus"
+				name       	"XML Comment"
+				value      	3)
+			    (object Attribute
+				tool       	"Cplusplus"
+				name       	"JavaDoc Comment"
+				value      	4)))
+		    (object Attribute
+			tool       	"Cplusplus"
+			name       	"BraceStyleSet"
+			value      	(list Attribute_Set
+			    (object Attribute
+				tool       	"Cplusplus"
+				name       	"B1"
+				value      	1)
+			    (object Attribute
+				tool       	"Cplusplus"
+				name       	"B2"
+				value      	2)
+			    (object Attribute
+				tool       	"Cplusplus"
+				name       	"B3"
+				value      	3)
+			    (object Attribute
+				tool       	"Cplusplus"
+				name       	"B4"
+				value      	4)
+			    (object Attribute
+				tool       	"Cplusplus"
+				name       	"B5"
+				value      	5)))
+		    (object Attribute
+			tool       	"Cplusplus"
+			name       	"MemberOrderSet"
+			value      	(list Attribute_Set
+			    (object Attribute
+				tool       	"Cplusplus"
+				name       	"Public First"
+				value      	1)
+			    (object Attribute
+				tool       	"Cplusplus"
+				name       	"Private First"
+				value      	2)
+			    (object Attribute
+				tool       	"Cplusplus"
+				name       	"Order by kind"
+				value      	3)
+			    (object Attribute
+				tool       	"Cplusplus"
+				name       	"Unordered"
+				value      	4)))
+		    (object Attribute
+			tool       	"Cplusplus"
+			name       	"ModelIdCommentRulesSet"
+			value      	(list Attribute_Set
+			    (object Attribute
+				tool       	"Cplusplus"
+				name       	"Code generation only"
+				value      	1)
+			    (object Attribute
+				tool       	"Cplusplus"
+				name       	"Code generation and reverse engineering"
+				value      	2)
+			    (object Attribute
+				tool       	"Cplusplus"
+				name       	"Never generate model IDs"
+				value      	3)))
+		    (object Attribute
+			tool       	"Cplusplus"
+			name       	"CommentRulesSet"
+			value      	(list Attribute_Set
+			    (object Attribute
+				tool       	"Cplusplus"
+				name       	"Always synchronize"
+				value      	1)
+			    (object Attribute
+				tool       	"Cplusplus"
+				name       	"Code generation only"
+				value      	2)
+			    (object Attribute
+				tool       	"Cplusplus"
+				name       	"Reverse engineering only"
+				value      	3)
+			    (object Attribute
+				tool       	"Cplusplus"
+				name       	"Never synchronize"
+				value      	4)))))
+	    (object Attribute
+		tool       	"Cplusplus"
+		name       	"default__Param"
+		value      	(list Attribute_Set
+		    (object Attribute
+			tool       	"Cplusplus"
+			name       	"CodeName"
+			value      	"")))
+	    (object Attribute
+		tool       	"Cplusplus"
+		name       	"default__Attribute"
+		value      	(list Attribute_Set
+		    (object Attribute
+			tool       	"Cplusplus"
+			name       	"Synchronize"
+			value      	TRUE)
+		    (object Attribute
+			tool       	"Cplusplus"
+			name       	"CodeName"
+			value      	"")))
+	    (object Attribute
+		tool       	"Cplusplus"
+		name       	"default__Operation"
+		value      	(list Attribute_Set
+		    (object Attribute
+			tool       	"Cplusplus"
+			name       	"Synchronize"
+			value      	TRUE)
+		    (object Attribute
+			tool       	"Cplusplus"
+			name       	"CodeName"
+			value      	"")
+		    (object Attribute
+			tool       	"Cplusplus"
+			name       	"InitialCodeBody"
+			value      	"")
+		    (object Attribute
+			tool       	"Cplusplus"
+			name       	"Inline"
+			value      	FALSE)
+		    (object Attribute
+			tool       	"Cplusplus"
+			name       	"GenerateFunctionBody"
+			value      	("GenerateFunctionBodySet" 2))
+		    (object Attribute
+			tool       	"Cplusplus"
+			name       	"GenerateFunctionBodySet"
+			value      	(list Attribute_Set
+			    (object Attribute
+				tool       	"Cplusplus"
+				name       	"Default"
+				value      	2)
+			    (object Attribute
+				tool       	"Cplusplus"
+				name       	"True"
+				value      	1)
+			    (object Attribute
+				tool       	"Cplusplus"
+				name       	"False"
+				value      	0)))))
+	    (object Attribute
+		tool       	"Cplusplus"
+		name       	"default__Class"
+		value      	(list Attribute_Set
+		    (object Attribute
+			tool       	"Cplusplus"
+			name       	"Synchronize"
+			value      	TRUE)
+		    (object Attribute
+			tool       	"Cplusplus"
+			name       	"CodeName"
+			value      	"")
+		    (object Attribute
+			tool       	"Cplusplus"
+			name       	"ImplementationType"
+			value      	"")
+		    (object Attribute
+			tool       	"Cplusplus"
+			name       	"HeaderSourceFile"
+			value      	"")
+		    (object Attribute
+			tool       	"Cplusplus"
+			name       	"BodySourceFile"
+			value      	"")))
+	    (object Attribute
+		tool       	"Cplusplus"
+		name       	"default__Category"
+		value      	(list Attribute_Set
+		    (object Attribute
+			tool       	"Cplusplus"
+			name       	"CodeName"
+			value      	"")
+		    (object Attribute
+			tool       	"Cplusplus"
+			name       	"IsNamespace"
+			value      	FALSE)))
+	    (object Attribute
+		tool       	"Cplusplus"
+		name       	"default__Uses"
+		value      	(list Attribute_Set
+		    (object Attribute
+			tool       	"Cplusplus"
+			name       	"BodyReferenceOnly"
+			value      	FALSE)))
+	    (object Attribute
+		tool       	"Cplusplus"
+		name       	"HiddenTool"
+		value      	FALSE)
+	    (object Attribute
+		tool       	"ANSIConvert"
+		name       	"HiddenTool"
+		value      	FALSE)
+	    (object Attribute
+		tool       	"CORBA"
+		name       	"propertyId"
+		value      	"809135966")
+	    (object Attribute
+		tool       	"CORBA"
+		name       	"default__Project"
+		value      	(list Attribute_Set
+		    (object Attribute
+			tool       	"CORBA"
+			name       	"CreateMissingDirectories"
+			value      	TRUE)
+		    (object Attribute
+			tool       	"CORBA"
+			name       	"Editor"
+			value      	("EditorType" 100))
+		    (object Attribute
+			tool       	"CORBA"
+			name       	"IncludePath"
+			value      	"")
+		    (object Attribute
+			tool       	"CORBA"
+			name       	"StopOnError"
+			value      	TRUE)
+		    (object Attribute
+			tool       	"CORBA"
+			name       	"EditorType"
+			value      	(list Attribute_Set
+			    (object Attribute
+				tool       	"CORBA"
+				name       	"BuiltIn"
+				value      	100)
+			    (object Attribute
+				tool       	"CORBA"
+				name       	"WindowsShell"
+				value      	101)))
+		    (object Attribute
+			tool       	"CORBA"
+			name       	"PathSeparator"
+			value      	"")
+		    (object Attribute
+			tool       	"CORBA"
+			name       	"GenerateRoseID"
+			value      	TRUE)
+		    (object Attribute
+			tool       	"CORBA"
+			name       	"NotShowRoseIDDlg"
+			value      	FALSE)
+		    (object Attribute
+			tool       	"CORBA"
+			name       	"GenerateComments"
+			value      	TRUE)
+		    (object Attribute
+			tool       	"CORBA"
+			name       	"UseTabs"
+			value      	FALSE)
+		    (object Attribute
+			tool       	"CORBA"
+			name       	"UseSpaces"
+			value      	TRUE)
+		    (object Attribute
+			tool       	"CORBA"
+			name       	"SpacingItems"
+			value      	4)
+		    (object Attribute
+			tool       	"CORBA"
+			name       	"BraceOnNewLine"
+			value      	FALSE)
+		    (object Attribute
+			tool       	"CORBA"
+			name       	"FundamentalTypes"
+			value      	"short; long; long long; unsigned short; unsigned long; unsigned long long; float; double; long double; char; boolean; wchar; octet; any;string; wstring; sequence; fixed; Object")))
+	    (object Attribute
+		tool       	"CORBA"
+		name       	"default__Class"
+		value      	(list Attribute_Set
+		    (object Attribute
+			tool       	"CORBA"
+			name       	"ArrayDimensions"
+			value      	"")
+		    (object Attribute
+			tool       	"CORBA"
+			name       	"ConstValue"
+			value      	"")
+		    (object Attribute
+			tool       	"CORBA"
+			name       	"ImplementationType"
+			value      	"")
+		    (object Attribute
+			tool       	"CORBA"
+			name       	"IsLocal"
+			value      	FALSE)))
+	    (object Attribute
+		tool       	"CORBA"
+		name       	"default__Module-Spec"
+		value      	(list Attribute_Set
+		    (object Attribute
+			tool       	"CORBA"
+			name       	"AdditionalIncludes"
+			value      	(value Text ""))
+		    (object Attribute
+			tool       	"CORBA"
+			name       	"CmIdentification"
+			value      	(value Text "  %X% %Q% %Z% %W%"))
+		    (object Attribute
+			tool       	"CORBA"
+			name       	"CopyrightNotice"
+			value      	(value Text ""))
+		    (object Attribute
+			tool       	"CORBA"
+			name       	"InclusionProtectionSymbol"
+			value      	"AUTO GENERATE")))
+	    (object Attribute
+		tool       	"CORBA"
+		name       	"default__Module-Body"
+		value      	(list Attribute_Set
+		    (object Attribute
+			tool       	"CORBA"
+			name       	"AdditionalIncludes"
+			value      	(value Text ""))
+		    (object Attribute
+			tool       	"CORBA"
+			name       	"CmIdentification"
+			value      	(value Text "  %X% %Q% %Z% %W%"))
+		    (object Attribute
+			tool       	"CORBA"
+			name       	"CopyrightNotice"
+			value      	(value Text ""))
+		    (object Attribute
+			tool       	"CORBA"
+			name       	"InclusionProtectionSymbol"
+			value      	"AUTO GENERATE")))
+	    (object Attribute
+		tool       	"CORBA"
+		name       	"default__Operation"
+		value      	(list Attribute_Set
+		    (object Attribute
+			tool       	"CORBA"
+			name       	"Context"
+			value      	"")
+		    (object Attribute
+			tool       	"CORBA"
+			name       	"OperationIsOneWay"
+			value      	FALSE)))
+	    (object Attribute
+		tool       	"CORBA"
+		name       	"default__Attribute"
+		value      	(list Attribute_Set
+		    (object Attribute
+			tool       	"CORBA"
+			name       	"ArrayDimensions"
+			value      	"")
+		    (object Attribute
+			tool       	"CORBA"
+			name       	"CaseSpecifier"
+			value      	"")
+		    (object Attribute
+			tool       	"CORBA"
+			name       	"IsReadOnly"
+			value      	FALSE)
+		    (object Attribute
+			tool       	"CORBA"
+			name       	"Order"
+			value      	"")))
+	    (object Attribute
+		tool       	"CORBA"
+		name       	"default__Role"
+		value      	(list Attribute_Set
+		    (object Attribute
+			tool       	"CORBA"
+			name       	"ArrayDimensions"
+			value      	"")
+		    (object Attribute
+			tool       	"CORBA"
+			name       	"CaseSpecifier"
+			value      	"")
+		    (object Attribute
+			tool       	"CORBA"
+			name       	"GenerateForwardReference"
+			value      	FALSE)
+		    (object Attribute
+			tool       	"CORBA"
+			name       	"IsReadOnly"
+			value      	FALSE)
+		    (object Attribute
+			tool       	"CORBA"
+			name       	"Order"
+			value      	"")
+		    (object Attribute
+			tool       	"CORBA"
+			name       	"BoundedRoleType"
+			value      	("AssocTypeSet" 47))
+		    (object Attribute
+			tool       	"CORBA"
+			name       	"AssocTypeSet"
+			value      	(list Attribute_Set
+			    (object Attribute
+				tool       	"CORBA"
+				name       	"Array"
+				value      	24)
+			    (object Attribute
+				tool       	"CORBA"
+				name       	"Sequence"
+				value      	47)))))
+	    (object Attribute
+		tool       	"CORBA"
+		name       	"default__Uses"
+		value      	(list Attribute_Set
+		    (object Attribute
+			tool       	"CORBA"
+			name       	"GenerateForwardReference"
+			value      	FALSE)))
+	    (object Attribute
+		tool       	"CORBA"
+		name       	"default__Param"
+		value      	(list Attribute_Set
+		    (object Attribute
+			tool       	"CORBA"
+			name       	"Direction"
+			value      	("ParamDirectionTypeSet" 102))
+		    (object Attribute
+			tool       	"CORBA"
+			name       	"ParamDirectionTypeSet"
+			value      	(list Attribute_Set
+			    (object Attribute
+				tool       	"CORBA"
+				name       	"in"
+				value      	102)
+			    (object Attribute
+				tool       	"CORBA"
+				name       	"inout"
+				value      	103)
+			    (object Attribute
+				tool       	"CORBA"
+				name       	"out"
+				value      	104)))))
+	    (object Attribute
+		tool       	"CORBA"
+		name       	"HiddenTool"
+		value      	FALSE)
+	    (object Attribute
+		tool       	"framework"
+		name       	"HiddenTool"
+		value      	FALSE)
+	    (object Attribute
+		tool       	"Rose Model Integrator"
+		name       	"HiddenTool"
+		value      	FALSE)
+	    (object Attribute
+		tool       	"Rose Web Publisher"
+		name       	"HiddenTool"
+		value      	FALSE)
+	    (object Attribute
+		tool       	"COM"
+		name       	"propertyId"
+		value      	"783606378")
+	    (object Attribute
+		tool       	"COM"
+		name       	"default__Class"
+		value      	(list Attribute_Set
+		    (object Attribute
+			tool       	"COM"
+			name       	"TypeKinds"
+			value      	(list Attribute_Set
+			    (object Attribute
+				tool       	"COM"
+				name       	"enum"
+				value      	100)
+			    (object Attribute
+				tool       	"COM"
+				name       	"record"
+				value      	101)
+			    (object Attribute
+				tool       	"COM"
+				name       	"module"
+				value      	102)
+			    (object Attribute
+				tool       	"COM"
+				name       	"interface"
+				value      	103)
+			    (object Attribute
+				tool       	"COM"
+				name       	"dispinterface"
+				value      	104)
+			    (object Attribute
+				tool       	"COM"
+				name       	"coclass"
+				value      	105)
+			    (object Attribute
+				tool       	"COM"
+				name       	"alias"
+				value      	106)
+			    (object Attribute
+				tool       	"COM"
+				name       	"union"
+				value      	107)
+			    (object Attribute
+				tool       	"COM"
+				name       	"max"
+				value      	108)
+			    (object Attribute
+				tool       	"COM"
+				name       	"(none)"
+				value      	109)))
+		    (object Attribute
+			tool       	"COM"
+			name       	"Generate"
+			value      	TRUE)
+		    (object Attribute
+			tool       	"COM"
+			name       	"kind"
+			value      	("TypeKinds" 109))
+		    (object Attribute
+			tool       	"COM"
+			name       	"uuid"
+			value      	"")
+		    (object Attribute
+			tool       	"COM"
+			name       	"version"
+			value      	"")
+		    (object Attribute
+			tool       	"COM"
+			name       	"helpstring"
+			value      	"")
+		    (object Attribute
+			tool       	"COM"
+			name       	"helpcontext"
+			value      	"")
+		    (object Attribute
+			tool       	"COM"
+			name       	"attributes"
+			value      	"")
+		    (object Attribute
+			tool       	"COM"
+			name       	"dllname"
+			value      	"")
+		    (object Attribute
+			tool       	"COM"
+			name       	"alias"
+			value      	"")))
+	    (object Attribute
+		tool       	"COM"
+		name       	"default__Operation"
+		value      	(list Attribute_Set
+		    (object Attribute
+			tool       	"COM"
+			name       	"Generate"
+			value      	TRUE)
+		    (object Attribute
+			tool       	"COM"
+			name       	"id"
+			value      	"")
+		    (object Attribute
+			tool       	"COM"
+			name       	"helpstring"
+			value      	"")
+		    (object Attribute
+			tool       	"COM"
+			name       	"attributes"
+			value      	"")))
+	    (object Attribute
+		tool       	"COM"
+		name       	"default__Attribute"
+		value      	(list Attribute_Set
+		    (object Attribute
+			tool       	"COM"
+			name       	"Generate"
+			value      	TRUE)
+		    (object Attribute
+			tool       	"COM"
+			name       	"id"
+			value      	"")
+		    (object Attribute
+			tool       	"COM"
+			name       	"helpstring"
+			value      	"")
+		    (object Attribute
+			tool       	"COM"
+			name       	"attributes"
+			value      	"")))
+	    (object Attribute
+		tool       	"COM"
+		name       	"default__Module-Spec"
+		value      	(list Attribute_Set
+		    (object Attribute
+			tool       	"COM"
+			name       	"Generate"
+			value      	TRUE)
+		    (object Attribute
+			tool       	"COM"
+			name       	"filename"
+			value      	"")
+		    (object Attribute
+			tool       	"COM"
+			name       	"library"
+			value      	"")
+		    (object Attribute
+			tool       	"COM"
+			name       	"uuid"
+			value      	"")
+		    (object Attribute
+			tool       	"COM"
+			name       	"version"
+			value      	"")
+		    (object Attribute
+			tool       	"COM"
+			name       	"helpstring"
+			value      	"")
+		    (object Attribute
+			tool       	"COM"
+			name       	"helpfile"
+			value      	"")
+		    (object Attribute
+			tool       	"COM"
+			name       	"helpcontext"
+			value      	"")
+		    (object Attribute
+			tool       	"COM"
+			name       	"lcid"
+			value      	"")
+		    (object Attribute
+			tool       	"COM"
+			name       	"attributes"
+			value      	"")))
+	    (object Attribute
+		tool       	"COM"
+		name       	"default__Param"
+		value      	(list Attribute_Set
+		    (object Attribute
+			tool       	"COM"
+			name       	"attributes"
+			value      	"")))
+	    (object Attribute
+		tool       	"COM"
+		name       	"HiddenTool"
+		value      	FALSE)
+	    (object Attribute
+		tool       	"VC++"
+		name       	"propertyId"
+		value      	"809135966")
+	    (object Attribute
+		tool       	"VC++"
+		name       	"default__Project"
+		value      	(list Attribute_Set
+		    (object Attribute
+			tool       	"VC++"
+			name       	"UpdateATL"
+			value      	TRUE)
+		    (object Attribute
+			tool       	"VC++"
+			name       	"SmartPointersOnAssoc"
+			value      	TRUE)
+		    (object Attribute
+			tool       	"VC++"
+			name       	"GenerateImports"
+			value      	TRUE)
+		    (object Attribute
+			tool       	"VC++"
+			name       	"PutImportsIn"
+			value      	"stdafx.h")
+		    (object Attribute
+			tool       	"VC++"
+			name       	"FullPathInImports"
+			value      	TRUE)
+		    (object Attribute
+			tool       	"VC++"
+			name       	"UseImportAttributes"
+			value      	TRUE)
+		    (object Attribute
+			tool       	"VC++"
+			name       	"ImportAttributes"
+			value      	"no_namespace named_guids")
+		    (object Attribute
+			tool       	"VC++"
+			name       	"ImportProjTypeLib"
+			value      	TRUE)
+		    (object Attribute
+			tool       	"VC++"
+			name       	"DefaultTypeLib"
+			value      	TRUE)
+		    (object Attribute
+			tool       	"VC++"
+			name       	"TypeLibLocation"
+			value      	"")
+		    (object Attribute
+			tool       	"VC++"
+			name       	"CompileProjTypeLib"
+			value      	TRUE)
+		    (object Attribute
+			tool       	"VC++"
+			name       	"IdlInterfaceAttributes"
+			value      	(value Text 
+|endpoint("")
+|local
+|object
+|pointer_default()
+|uuid("")
+|version("")
+|encode
+|decode
+|auto_handle
+|implicit_handle("")
+|code
+|nocode
+			))
+		    (object Attribute
+			tool       	"VC++"
+			name       	"IdlCoClassAttributes"
+			value      	(value Text 
+|uuid("")
+|helpstring("")
+|helpcontext("")
+|licensed
+|version("")
+|control
+|hidden
+|appobject
+			))
+		    (object Attribute
+			tool       	"VC++"
+			name       	"IdlCoClassInterfaceAttributes"
+			value      	(value Text 
+|default
+|source
+			))
+		    (object Attribute
+			tool       	"VC++"
+			name       	"IdlParameterAttributes"
+			value      	(value Text 
+|in
+|out
+|retval
+			))
+		    (object Attribute
+			tool       	"VC++"
+			name       	"IdlMethodAttributes"
+			value      	(value Text 
+|id(1)
+|helpstring("")
+|call_as("")
+|callback
+|helpcontext("")
+|hidden
+|local
+|restricted
+|source
+|vararg
+			))
+		    (object Attribute
+			tool       	"VC++"
+			name       	"IdlPropertyAttributes"
+			value      	(value Text 
+|id()
+|helpstring("")
+|call_as("")
+|helpcontext("")
+|hidden
+|local
+|restricted
+|source
+|vararg
+|bindable
+|defaultbind
+|defaultcallelem
+|displaybind
+|immediatebind
+|nonbrowseable
+|requestedit
+			))
+		    (object Attribute
+			tool       	"VC++"
+			name       	"RvcPtyVersion"
+			value      	"1.4")
+		    (object Attribute
+			tool       	"VC++"
+			name       	"ModelIDStyle"
+			value      	2)
+		    (object Attribute
+			tool       	"VC++"
+			name       	"DocStyle"
+			value      	1)
+		    (object Attribute
+			tool       	"VC++"
+			name       	"GenerateIncludes"
+			value      	TRUE)
+		    (object Attribute
+			tool       	"VC++"
+			name       	"ApplyPattern"
+			value      	FALSE)
+		    (object Attribute
+			tool       	"VC++"
+			name       	"CreateBackupFiles"
+			value      	TRUE)
+		    (object Attribute
+			tool       	"VC++"
+			name       	"SupportCodeName"
+			value      	FALSE)
+		    (object Attribute
+			tool       	"VC++"
+			name       	"DocRevEngineer"
+			value      	TRUE)
+		    (object Attribute
+			tool       	"VC++"
+			name       	"CreateOverviewDiagrams"
+			value      	TRUE)
+		    (object Attribute
+			tool       	"VC++"
+			name       	"UpdateModelIDsInCode"
+			value      	TRUE)
+		    (object Attribute
+			tool       	"VC++"
+			name       	"AttributeTypes"
+			value      	(value Text 
+|attr1=bool
+|attr2=short
+|attr3=int
+|attr4=long
+|attr5=char
+|attr6=float
+|attr7=double
+|attr8=void
+|attr9=clock_t
+|attr10=_complex
+|attr11=_dev_t
+|attr12=div_t
+|attr13=_exception
+|attr14=FILE
+|attr15=_finddata_t
+|attr16=_FPIEEE_RECORD
+|attr17=fpos_t
+|attr18=_HEAPINFO
+|attr19=jmp_buf
+|attr20=lconv
+|attr21=ldiv_t
+|attr22=_off_t
+|attr23=_onexit_t
+|attr24=_PNH
+|attr25=ptrdiff_t
+|attr26=sig_atomic_t
+|attr27=size_t
+|attr28=_stat
+|attr29=time_t
+|attr30=_timeb
+|attr31=tm
+|attr32=_utimbuf
+|attr33=va_list
+|attr34=wchar_t
+|attr35=wctrans_t
+|attr36=wctype_t
+|attr37=_wfinddata_t
+|attr38=_wfinddatai64_t
+|attr39=wint_t
+|attr40=ABORTPROC
+|attr41=ACMDRIVERENUMCB
+|attr42=ACMDRIVERPROC
+|attr43=ACMFILTERCHOOSEHOOKPROC
+|attr44=ACMFILTERENUMCB
+|attr45=ACMFILTERTAGENUMCB
+|attr46=ACMFORMATCHOOSEHOOKPROC
+|attr47=ACMFORMATENUMCB
+|attr48=ACMFORMATTAGENUMCB
+|attr49=APPLET_PROC
+|attr50=ATOM
+|attr51=BOOL
+|attr52=BOOLEAN
+|attr53=BYTE
+|attr54=CALINFO_ENUMPROC
+|attr55=CALLBACK
+|attr56=CHAR
+|attr57=COLORREF
+|attr58=CONST
+|attr59=CRITICAL_SECTION
+|attr60=CTRYID
+|attr61=DATEFMT_ENUMPROC
+|attr62=DESKTOPENUMPROC
+|attr63=DLGPROC
+|attr64=DRAWSTATEPROC
+|attr65=DWORD
+|attr66=EDITWORDBREAKPROC
+|attr67=ENHMFENUMPROC
+|attr68=ENUMRESLANGPROC
+|attr69=ENUMRESNAMEPROC
+|attr70=ENUMRESTYPEPROC
+|attr71=FARPROC
+|attr72=FILE_SEGMENT_ELEMENT
+|attr73=FLOAT
+|attr74=FONTENUMPROC
+|attr75=GOBJENUMPROC
+|attr76=GRAYSTRINGPROC
+|attr77=HACCEL
+|attr78=HANDLE
+|attr79=HBITMAP
+|attr80=HBRUSH
+|attr81=HCOLORSPACE
+|attr82=HCONV
+|attr83=HCONVLIST
+|attr84=HCURSOR
+|attr85=HDC
+|attr86=HDDEDATA
+|attr87=HDESK
+|attr88=HDROP
+|attr89=HDWP
+|attr90=HENHMETAFILE
+|attr91=HFILE
+|attr92=HFONT
+|attr93=HGDIOBJ
+|attr94=HGLOBAL
+|attr95=HHOOK
+|attr96=HICON
+|attr97=HIMAGELIST
+|attr98=HIMC
+|attr99=HINSTANCE
+|attr100=HKEY
+|attr101=HKL
+|attr102=HLOCAL
+|attr103=HMENU
+|attr104=HMETAFILE
+|attr105=HMODULE
+|attr106=HMONITOR
+|attr107=HOOKPROC
+|attr108=HPALETTE
+|attr109=HPEN
+|attr110=HRGN
+|attr111=HRSRC
+|attr112=HSZ
+|attr113=HTREEITEM
+|attr114=HWINSTA
+|attr115=HWND
+|attr116=INT
+|attr117=IPADDR
+|attr118=LANGID
+|attr119=LCID
+|attr120=LCSCSTYPE
+|attr121=LCSGAMUTMATCH
+|attr122=LCTYPE
+|attr123=LINEDDAPROC
+|attr124=LOCALE_ENUMPROC
+|attr125=LONG
+|attr126=LONGLONG
+|attr127=LPARAM
+|attr128=LPBOOL
+|attr129=LPBYTE
+|attr130=LPCCHOOKPROC
+|attr131=LPCFHOOKPROC
+|attr132=LPCOLORREF
+|attr133=LPCRITICAL_SECTION
+|attr134=LPCSTR
+|attr135=LPCTSTR
+|attr136=LPCVOID
+|attr137=LPCWSTR
+|attr138=LPDWORD
+|attr139=LPFIBER_START_ROUTINE
+|attr140=LPFRHOOKPROC
+|attr141=LPHANDLE
+|attr142=LPHANDLER_FUNCTION
+|attr143=LPINT
+|attr144=LPLONG
+|attr145=LPOFNHOOKPROC
+|attr146=LPPAGEPAINTHOOK
+|attr147=LPPAGESETUPHOOK
+|attr148=LPPRINTHOOKPROC
+|attr149=LPPROGRESS_ROUTINE
+|attr150=LPSETUPHOOKPROC
+|attr151=LPSTR
+|attr152=LPSTREAM
+|attr153=LPTHREAD_START_ROUTINE
+|attr154=LPTSTR
+|attr155=LPVOID
+|attr156=LPWORD
+|attr157=LPWSTR
+|attr158=LRESULT
+|attr159=LUID
+|attr160=PBOOL
+|attr161=PBOOLEAN
+|attr162=PBYTE
+|attr163=PCHAR
+|attr164=PCRITICAL_SECTION
+|attr165=PCSTR
+|attr166=PCTSTR
+|attr167=PCWCH
+|attr168=PCWSTR
+|attr169=PDWORD
+|attr170=PFLOAT
+|attr171=PFNCALLBACK
+|attr172=PHANDLE
+|attr173=PHANDLER_ROUTINE
+|attr174=PHKEY
+|attr175=PINT
+|attr176=PLCID
+|attr177=PLONG
+|attr178=PLUID
+|attr179=PROPENUMPROC
+|attr180=PROPENUMPROCEX
+|attr181=PSHORT
+|attr182=PSTR
+|attr183=PTBYTE
+|attr184=PTCHAR
+|attr185=PTIMERAPCROUTINE
+|attr186=PTSTR
+|attr187=PUCHAR
+|attr188=PUINT
+|attr189=PULONG
+|attr190=PUSHORT
+|attr191=PVOID
+|attr192=PWCHAR
+|attr193=PWORD
+|attr194=PWSTR
+|attr195=REGISTERWORDENUMPROC
+|attr196=REGSAM
+|attr197=SC_HANDLE
+|attr198=SC_LOCK
+|attr199=SENDASYNCPROC
+|attr200=SERVICE_STATUS_HANDLE
+|attr201=SHORT
+|attr202=TBYTE
+|attr203=TCHAR
+|attr204=TIMEFMT_ENUMPROC
+|attr205=TIMERPROC
+|attr206=UCHAR
+|attr207=UINT
+|attr208=ULONG
+|attr209=ULONGLONG
+|attr210=UNSIGNED
+|attr211=USHORT
+|attr212=VOID
+|attr213=WCHAR
+|attr214=WINAPI
+|attr215=WINSTAENUMPROC
+|attr216=WNDENUMPROC
+|attr217=WNDPROC
+|attr218=WORD
+|attr219=WPARAM
+|attr220=YIELDPROC
+|attr221=CPoint
+|attr222=CRect
+|attr223=CSize
+|attr224=CString
+|attr225=CTime
+|attr226=CTimeSpan
+|attr227=CCreateContext
+|attr228=CMemoryState
+|attr229=COleSafeArray
+|attr230=CPrintInfo
+|attr231=HRESULT
+			))
+		    (object Attribute
+			tool       	"VC++"
+			name       	"Containers"
+			value      	(value Text 
+|cont1=CArray<$TYPE, $TYPE&>
+|cont2=CByteArray
+|cont3=CDWordArray
+|cont4=CObArray
+|cont5=CPtrArray
+|cont6=CStringArray
+|cont7=CUIntArray
+|cont8=CWordArray
+|cont9=CList<$TYPE, $TYPE&>
+|cont10=CPtrList
+|cont11=CObList
+|cont12=CStringList
+|cont13=CMapWordToPtr
+|cont14=CMapPtrToWord
+|cont15=CMapPtrToPtr
+|cont16=CMapWordToOb
+|cont17=CMapStringToPtr
+|cont18=CMapStringToOb
+|cont19=CMapStringToString
+|cont20=CTypedPtrArray<CPtrArray, $TYPE*>
+|cont21=CTypedPtrArray<CObArray, $TYPE*>
+|cont22=CTypedPtrList<CObList, $TYPE*>
+|cont23=CTypedPtrList<CPtrList, $TYPE*>
+|cont24=CComObject<$TYPE>
+|cont25=CComPtr<$TYPE>
+|cont26=CComQIPtr<$TYPE>
+|cont27=CComQIPtr<$TYPE, IID*>
+			))
+		    (object Attribute
+			tool       	"VC++"
+			name       	"ClassMethods"
+			value      	(value Text 
+|*_body=// ToDo: Add your specialized code here and/or call the base class
+|cm1=$NAME()
+|cm2=$NAME(orig:const $NAME&)
+|cm3=<<virtual>> ~$NAME()
+|cm4=operator=(rhs:$NAME&):$NAME&
+|cm4_body=// ToDo: Add your specialized code here and/or call the base class||return rhs;
+|cm5=<<const>> operator==(rhs:const $NAME&):bool
+|cm5_body=// ToDo: Add your specialized code here and/or call the base class||return false;
+|cm6=<<const>> operator!=(rhs:$NAME&):bool
+|cm6_body=// ToDo: Add your specialized code here and/or call the base class||return false;
+|cm7=<<const>> operator<(rhs:$NAME&):bool
+|cm7_body=// ToDo: Add your specialized code here and/or call the base class||return false;
+|cm8=<<const>> operator>(rhs:$NAME&):bool
+|cm8_body=// ToDo: Add your specialized code here and/or call the base class||return false;
+|cm9=<<const>> operator<=(rhs:$NAME&):bool
+|cm9_body=// ToDo: Add your specialized code here and/or call the base class||return false;
+|cm10=<<const>> operator>=(rhs:$NAME&):bool
+|cm10_body=// ToDo: Add your specialized code here and/or call the base class||return false;
+|cm11=<<friend>> operator>>(i:istream&, rhs:$NAME&):istream&
+|cm11_body=// ToDo: Add your specialized code here and/or call the base class||return i;
+|cm12=<<friend>> operator<<(o:ostream&, rhs:const $NAME&):ostream&
+|cm12_body=// ToDo: Add your specialized code here and/or call the base class||return o;
+			))
+		    (object Attribute
+			tool       	"VC++"
+			name       	"Accessors"
+			value      	(value Text 
+|agf=<<const>> get_$BASICNAME():const $TYPE
+|agf_body=return $NAME;
+|asf=set_$BASICNAME(value:$TYPE):void
+|asf_body=$NAME = value;|return;
+|agv=<<const>> get_$BASICNAME():const $TYPE&
+|agv_body=return $NAME;
+|asv=set_$BASICNAME(value:$TYPE&):void
+|asv_body=$NAME = value;|return;
+|agp=<<const>> get_$BASICNAME():const $TYPE
+|agp_body=return $NAME;
+|asp=set_$BASICNAME(value:$TYPE):void
+|asp_body=$NAME = value;|return;
+|agr=<<const>> get_$BASICNAME():const $TYPE
+|agr_body=return $NAME;
+|asr=set_$BASICNAME(value:$TYPE):void
+|asr_body=$NAME = value;|return;
+|aga=<<const>> get_$BASICNAME(index:int):const $TYPE
+|aga_body=return $NAME[index];
+|asa=set_$BASICNAME(index:int, value:$TYPE):void
+|asa_body=$NAME[index] = value;|return;
+			))
+		    (object Attribute
+			tool       	"VC++"
+			name       	"Conditionals"
+			value      	(value Text 
+|*_decl=#ifdef _DEBUG
+|*_base=CObject
+|cond1=<<virtual, const>> AssertValid():void
+|cond1_body=$SUPERNAME::AssertValid();
+|cond2=<<virtual, const>> Dump(dc:CDumpContext&):void
+|cond2_body=$SUPERNAME::Dump(dc);
+			))
+		    (object Attribute
+			tool       	"VC++"
+			name       	"Patterns"
+			value      	(value Text 
+|patrn1=cm1,cm3,cond1,cond2
+|Patrn1_name=Default
+			))
+		    (object Attribute
+			tool       	"VC++"
+			name       	"AtlClassPrefix"
+			value      	"C")
+		    (object Attribute
+			tool       	"VC++"
+			name       	"AtlInterfacePrefix"
+			value      	"I")
+		    (object Attribute
+			tool       	"VC++"
+			name       	"AtlTypeDescription"
+			value      	"Class")
+		    (object Attribute
+			tool       	"VC++"
+			name       	"DefaultLogicalPackage"
+			value      	"$language Reverse Engineered/$component")
+		    (object Attribute
+			tool       	"VC++"
+			name       	"DefaultComponentPackage"
+			value      	"")))
+	    (object Attribute
+		tool       	"VC++"
+		name       	"default__Class"
+		value      	(list Attribute_Set
+		    (object Attribute
+			tool       	"VC++"
+			name       	"Generate"
+			value      	TRUE)
+		    (object Attribute
+			tool       	"VC++"
+			name       	"HeaderFileName"
+			value      	"")
+		    (object Attribute
+			tool       	"VC++"
+			name       	"CodeFileName"
+			value      	"")))
+	    (object Attribute
+		tool       	"VC++"
+		name       	"default__Module-Spec"
+		value      	(list Attribute_Set
+		    (object Attribute
+			tool       	"VC++"
+			name       	"InternalMap"
+			value      	(value Text 
+|*:AUTO:AUTO
+|
+			))
+		    (object Attribute
+			tool       	"VC++"
+			name       	"ExportMap"
+			value      	(value Text 
+|*:AUTO:AUTO
+|
+			))
+		    (object Attribute
+			tool       	"VC++"
+			name       	"InitialSourceIncludes"
+			value      	(value Text 
+|"stdafx.h"
+			))
+		    (object Attribute
+			tool       	"VC++"
+			name       	"InitialHeaderIncludes"
+			value      	(value Text ""))
+		    (object Attribute
+			tool       	"VC++"
+			name       	"Copyright"
+			value      	(value Text "Copyright (C) 1991 - 1999 Rational Software Corporation"))
+		    (object Attribute
+			tool       	"VC++"
+			name       	"KindSet"
+			value      	(list Attribute_Set
+			    (object Attribute
+				tool       	"VC++"
+				name       	"(none)"
+				value      	300)
+			    (object Attribute
+				tool       	"VC++"
+				name       	"DLL"
+				value      	301)
+			    (object Attribute
+				tool       	"VC++"
+				name       	"EXE"
+				value      	302)
+			    (object Attribute
+				tool       	"VC++"
+				name       	"MIDL"
+				value      	303)))
+		    (object Attribute
+			tool       	"VC++"
+			name       	"Kind"
+			value      	("KindSet" 300))
+		    (object Attribute
+			tool       	"VC++"
+			name       	"BodyExtensions"
+			value      	(value Text 
+|.cpp
+|.cxx
+|.inl
+			))
+		    (object Attribute
+			tool       	"VC++"
+			name       	"HeaderExtensions"
+			value      	(value Text 
+|.h
+|.hpp
+|.hxx
+|inl
+			))
+		    (object Attribute
+			tool       	"VC++"
+			name       	"ProjectFolders"
+			value      	(value Text 
+|Source Files
+|Header Files
+			))
+		    (object Attribute
+			tool       	"VC++"
+			name       	"UsePathMap"
+			value      	FALSE)))
+	    (object Attribute
+		tool       	"VC++"
+		name       	"default__Role"
+		value      	(list Attribute_Set
+		    (object Attribute
+			tool       	"VC++"
+			name       	"Const"
+			value      	FALSE)
+		    (object Attribute
+			tool       	"VC++"
+			name       	"Generate"
+			value      	TRUE)
+		    (object Attribute
+			tool       	"VC++"
+			name       	"InitialValue"
+			value      	"")))
+	    (object Attribute
+		tool       	"VC++"
+		name       	"default__Uses"
+		value      	(list Attribute_Set
+		    (object Attribute
+			tool       	"VC++"
+			name       	"Generate"
+			value      	TRUE)))
+	    (object Attribute
+		tool       	"VC++"
+		name       	"default__Category"
+		value      	(list Attribute_Set
+		    (object Attribute
+			tool       	"VC++"
+			name       	"IsDirectory"
+			value      	FALSE)
+		    (object Attribute
+			tool       	"VC++"
+			name       	"Directory"
+			value      	"")))
+	    (object Attribute
+		tool       	"VC++"
+		name       	"default__Attribute"
+		value      	(list Attribute_Set
+		    (object Attribute
+			tool       	"VC++"
+			name       	"Generate"
+			value      	TRUE)))
+	    (object Attribute
+		tool       	"VC++"
+		name       	"default__Operation"
+		value      	(list Attribute_Set
+		    (object Attribute
+			tool       	"VC++"
+			name       	"GenerateSet"
+			value      	(list Attribute_Set
+			    (object Attribute
+				tool       	"VC++"
+				name       	"DoNotGenerate"
+				value      	400)
+			    (object Attribute
+				tool       	"VC++"
+				name       	"DeclareAndDefine"
+				value      	401)
+			    (object Attribute
+				tool       	"VC++"
+				name       	"DeclareOnly"
+				value      	402)))
+		    (object Attribute
+			tool       	"VC++"
+			name       	"Generate"
+			value      	("GenerateSet" 401))
+		    (object Attribute
+			tool       	"VC++"
+			name       	"Inline"
+			value      	FALSE)
+		    (object Attribute
+			tool       	"VC++"
+			name       	"DefaultBody"
+			value      	(value Text ""))))
+	    (object Attribute
+		tool       	"VC++"
+		name       	"HiddenTool"
+		value      	FALSE)
+	    (object Attribute
+		tool       	"Version Control"
+		name       	"HiddenTool"
+		value      	FALSE)
+	    (object Attribute
+		tool       	"VisualStudio"
+		name       	"HiddenTool"
+		value      	FALSE))
+	quid       	"4794685E02F3"))
